@@ -27,8 +27,11 @@ jobs:
 
       # run tests!
       - run:
-          name: "Jest tests"
+          name: "Jest"
           command: yarn test -w2
+      - run:
+          name: "Linting"
+          command: yarn lint
       - run:
           name: "Report failing master"
           command: ~/repo/.circleci/notify_failure.sh

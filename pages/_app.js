@@ -8,7 +8,6 @@ import { initStore } from "../store";
 export default withRedux(initStore)(
   class MyApp extends App {
     static async getInitialProps({ Component, ctx }) {
-      let currentReduxState = ctx.store.getState();
       if (ctx.req) {
         ctx.store.dispatch({ type: "LOAD_DATA", data: ctx.req.data });
       }

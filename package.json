@@ -2,9 +2,12 @@
   "name": "create-next-example-app",
   "scripts": {
     "dev": "node server.js",
+    "precommit": "pretty-quick --staged",
     "build": "next build",
+    "heroku-postbuild": "next build",
     "start": "NODE_ENV=production node server.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "node_modules/eslint/bin/eslint.js pages  __tests__"
   },
   "dependencies": {
     "airtable": "^0.5.6",
@@ -26,10 +29,16 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-0",
+    "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
+    "eslint": "^5.5.0",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
     "jest": "^23.6.0",
+    "prettier": "1.14.2",
+    "pretty-quick": "^1.6.0",
     "regenerator-runtime": "^0.12.1"
   }
 }

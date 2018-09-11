@@ -1,8 +1,7 @@
 import { createStore } from "redux";
 import airtableConstants from "./utils/airtable_constants";
 
-const initialState = {
-};
+const initialState = {};
 
 airtableConstants.tableNames.forEach(tableName => {
   initialState[tableName] = [];
