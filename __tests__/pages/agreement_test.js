@@ -8,7 +8,8 @@ describe("Agreement", () => {
 
   beforeEach(() => {
     props = {
-      template: []
+      template: [],
+      reduxState: {}
     };
   });
 

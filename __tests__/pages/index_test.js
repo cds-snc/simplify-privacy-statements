@@ -1,10 +1,17 @@
-import React from 'react';
+import React from "react";
 import { mount } from "enzyme";
 
-import Index from "../../pages/index"
+import { Index } from "../../pages/index";
 
 describe("Index", () => {
-  it("renders", async () => {
-    mount(<Index  />);
+  let props;
+  beforeEach(() => {
+    props = {
+      reduxState: {}
+    };
   });
-})
+
+  it("renders", async () => {
+    mount(<Index {...props} />);
+  });
+});
