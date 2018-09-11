@@ -1,24 +1,6 @@
-// var Airtable = require('airtable');
-var readKey = process.env.AIRTABLE_API_KEY_2;
+var readKey = process.env.VAC_CDS_SNC_KEY;
 require("isomorphic-fetch");
-
-// var base = new Airtable({apiKey: readKey}).base('app5B7wVD0mviQcc0');
 var airtableConstants = require("./airtable_constants");
-
-
-// fetchTableFromAirtable = (tableName) => {
-//
-//   base(tableName).select({
-//     view: 'Grid view'
-//   }).firstPage(function(err, records) {
-//     if (err) { console.error(err); return; }
-//     return records;
-//     records.forEach(function(record) {
-//       console.log('Retrieved', record.get('key'));
-//     });
-//   });
-//
-// }
 
 var fetchTableFromAirtable = async function fetchTableFromAirtable(table) {
   var offset = undefined;
