@@ -28,97 +28,34 @@ export class Index extends Component {
   };
 
   render() {
+    const { questions } = this.props.reduxState;
     const { reduxState } = this.props;
+
+    const jsx_array = [];
+    questions.forEach((q, key) => {
+      const props = {
+        className: form_group,
+        name: q.variable_name,
+        input: {
+          onChange: this.getOnChange(q.variable_name),
+          value: reduxState[q.variable_name]
+        },
+        hint: q.hint,
+        key: key
+      };
+
+      if (q.input_type == "short_text") {
+        jsx_array.push(<InputField {...props}>{q.title}</InputField>);
+      } else if (q.input_type == "long_text") {
+        jsx_array.push(<TextArea {...props}>{q.title}</TextArea>);
+      }
+    });
+
     return (
       <div className={page_wrapper}>
         <h1>Generate a Simple Privacy Statement</h1>
 
-        <InputField
-          className={form_group}
-          name="researcher_name"
-          input={{
-            onChange: this.getOnChange("researcher_name"),
-            value: reduxState.researcher_name
-          }}
-        >
-          Researcher Name
-        </InputField>
-
-        <InputField
-          className={form_group}
-          name="researcher_phone"
-          input={{
-            onChange: this.getOnChange("researcher_phone"),
-            value: reduxState.researcher_phone
-          }}
-        >
-          Researcher Phone
-        </InputField>
-
-        <InputField
-          className={form_group}
-          name="researcher_email"
-          input={{
-            onChange: this.getOnChange("researcher_email"),
-            value: reduxState.researcher_email
-          }}
-        >
-          Researcher Email
-        </InputField>
-
-        <TextArea
-          className={form_group}
-          name="session_goal"
-          hint={
-            "e.g. We are conducting research to help us evaluate the ease of use and content of a website."
-          }
-          input={{
-            onChange: this.getOnChange("session_goal"),
-            value: reduxState.session_goal
-          }}
-        >
-          What is the goal of the session?
-        </TextArea>
-
-        <TextArea
-          className={form_group}
-          name="product_goal"
-          hint={
-            "e.g. This will help us create an online tool that will make it easier for Veterans to determine which VAC services are relevant to them."
-          }
-          input={{
-            onChange: this.getOnChange("product_goal"),
-            value: reduxState.product_goal
-          }}
-        >
-          What is the goal of the product?
-        </TextArea>
-
-        <TextArea
-          className={form_group}
-          name="session_activity"
-          hint={
-            "e.g. To do this, we will ask you to complete specific tasks with this prototype and ask you to describe your thoughts and impressions."
-          }
-          input={{
-            onChange: this.getOnChange("session_activity"),
-            value: reduxState.session_activity
-          }}
-        >
-          What activity will take place during the session?
-        </TextArea>
-
-        <TextArea
-          className={form_group}
-          name="session_duration"
-          hint={"e.g. This will take us approximately 1 hour."}
-          input={{
-            onChange: this.getOnChange("session_duration"),
-            value: reduxState.session_duration
-          }}
-        >
-          How long will the session take?
-        </TextArea>
+        {jsx_array}
 
         <Link href="/agreement">
           <Button>Submit</Button>
