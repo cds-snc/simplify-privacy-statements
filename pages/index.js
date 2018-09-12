@@ -6,6 +6,7 @@ import TextArea from "@govuk-react/text-area";
 import Link from "next/link";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import MultipleChoice from "../components/multiple_choice";
 
 const page_wrapper = css`
   margin: 0 auto;
@@ -44,10 +45,27 @@ export class Index extends Component {
         key: key
       };
 
+      if ("multiple_choice_options" in q) {
+        q.options = reduxState.multiple_choice_options.filter(x => {
+          return q.multiple_choice_options.indexOf(x.record_id) > -1;
+        });
+      }
+
       if (q.input_type == "short_text") {
         jsx_array.push(<InputField {...props}>{q.title}</InputField>);
       } else if (q.input_type == "long_text") {
         jsx_array.push(<TextArea {...props}>{q.title}</TextArea>);
+      } else if (q.input_type == "multiple_choice") {
+        jsx_array.push(
+          <MultipleChoice
+            hint={q.hint}
+            label={q.title}
+            name={q.variable_name}
+            options={q.options}
+            className={form_group}
+            key={key}
+          />
+        );
       }
     });
 
