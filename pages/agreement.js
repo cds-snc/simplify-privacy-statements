@@ -25,8 +25,18 @@ export class Agreement extends Component {
   render() {
     const { reduxState } = this.props;
 
-    let template = this.props.template[0].template;
-    template = this.cleanTemplate(template);
+    const jsx_array = reduxState.template_1.map((row, key) => {
+      if (row.logic_type === "none") {
+        return (
+          <JsxParser
+            bindings={reduxState}
+            components={{}}
+            jsx={this.cleanTemplate(row.display_text)}
+            key={key}
+          />
+        );
+      }
+    });
 
     return (
       <div>
@@ -39,7 +49,7 @@ export class Agreement extends Component {
           </Link>
         </div>
         <h1>Agreement</h1>
-        <JsxParser bindings={reduxState} components={{}} jsx={template} />
+        {jsx_array}
       </div>
     );
   }
@@ -47,14 +57,12 @@ export class Agreement extends Component {
 
 const mapStateToProps = reduxState => {
   return {
-    reduxState: reduxState,
-    template: reduxState.template
+    reduxState: reduxState
   };
 };
 
 Agreement.propTypes = {
-  reduxState: PropTypes.object,
-  template: PropTypes.array.isRequired
+  reduxState: PropTypes.object
 };
 
 export default connect(mapStateToProps)(Agreement);
