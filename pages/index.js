@@ -28,6 +28,7 @@ export class Index extends Component {
   };
 
   render() {
+    const { reduxState } = this.props;
     return (
       <div className={page_wrapper}>
         <h1>Generate a Simple Privacy Statement</h1>
@@ -35,16 +36,33 @@ export class Index extends Component {
         <InputField
           className={form_group}
           name="researcher_name"
-          input={{ onChange: this.getOnChange("researcher_name") }}
+          input={{
+            onChange: this.getOnChange("researcher_name"),
+            value: reduxState.researcher_name
+          }}
         >
           Researcher Name
         </InputField>
 
-        <InputField className={form_group} name="researcher_phone">
+        <InputField
+          className={form_group}
+          name="researcher_phone"
+          input={{
+            onChange: this.getOnChange("researcher_phone"),
+            value: reduxState.researcher_phone
+          }}
+        >
           Researcher Phone
         </InputField>
 
-        <InputField className={form_group} name="researcher_email">
+        <InputField
+          className={form_group}
+          name="researcher_email"
+          input={{
+            onChange: this.getOnChange("researcher_email"),
+            value: reduxState.researcher_email
+          }}
+        >
           Researcher Email
         </InputField>
 
@@ -54,6 +72,10 @@ export class Index extends Component {
           hint={
             "e.g. We are conducting research to help us evaluate the ease of use and content of a website."
           }
+          input={{
+            onChange: this.getOnChange("session_goal"),
+            value: reduxState.session_goal
+          }}
         >
           What is the goal of the session?
         </TextArea>
@@ -64,6 +86,10 @@ export class Index extends Component {
           hint={
             "e.g. This will help us create an online tool that will make it easier for Veterans to determine which VAC services are relevant to them."
           }
+          input={{
+            onChange: this.getOnChange("product_goal"),
+            value: reduxState.product_goal
+          }}
         >
           What is the goal of the product?
         </TextArea>
@@ -74,6 +100,10 @@ export class Index extends Component {
           hint={
             "e.g. To do this, we will ask you to complete specific tasks with this prototype and ask you to describe your thoughts and impressions."
           }
+          input={{
+            onChange: this.getOnChange("session_activity"),
+            value: reduxState.session_activity
+          }}
         >
           What activity will take place during the session?
         </TextArea>
@@ -82,6 +112,10 @@ export class Index extends Component {
           className={form_group}
           name="session_duration"
           hint={"e.g. This will take us approximately 1 hour."}
+          input={{
+            onChange: this.getOnChange("session_duration"),
+            value: reduxState.session_duration
+          }}
         >
           How long will the session take?
         </TextArea>
