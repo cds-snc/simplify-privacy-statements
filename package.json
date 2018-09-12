@@ -15,6 +15,7 @@
     "compression": "^1.7.3",
     "detect-browser": "^3.0.0",
     "emotion": "^9.2.8",
+    "emotion-server": "^9.2.8",
     "express": "^4.16.3",
     "govuk-react": "^0.2.11",
     "helmet": "^3.13.0",
