@@ -5,6 +5,7 @@ import Button from "@govuk-react/button";
 import JsxParser from "react-jsx-parser";
 import PropTypes from "prop-types";
 import { css } from "react-emotion";
+import MarkdownIt from "markdown-it";
 
 const button = css`
   display: inline;
@@ -12,18 +13,10 @@ const button = css`
 `;
 
 export class Agreement extends Component {
-  cleanTemplate = templateIn => {
-    let template = templateIn.replace(/(?:\r\n|\r|\n)/g, "<br/>\n");
-    template = template.replace(/(<br\/>)*<li>/g, "<li>");
-    template = template.replace(/<li>(<br\/>)*/g, "<li>");
-    template = template.replace(/<\/li>(<br\/>)*/g, "</li>");
-    template = template.replace(/<ul>(<br\/>)*/g, "<ul>");
-    template = template.replace(/<\/ul>(<br\/>)*/g, "</ul>");
-    return template;
-  };
-
   render() {
     const { reduxState } = this.props;
+
+    let md = new MarkdownIt({ breaks: true });
 
     const jsx_array = reduxState.template_1.map((row, key) => {
       if (row.logic_type === "none") {
@@ -31,7 +24,7 @@ export class Agreement extends Component {
           <JsxParser
             bindings={reduxState}
             components={{}}
-            jsx={this.cleanTemplate(row.display_text)}
+            jsx={md.render(row.display_text).replace(/<br>/g, "<br/>")}
             key={key}
           />
         );
