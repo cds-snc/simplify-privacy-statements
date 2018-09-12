@@ -14,6 +14,7 @@ describe("Agreement", () => {
   });
 
   it("renders", async () => {
+    expect(true).toEqual(false);
     mount(<Agreement {...props} />);
   });
 });
