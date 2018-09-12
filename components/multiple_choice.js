@@ -12,10 +12,14 @@ export class MultipleChoice extends Component {
   render() {
     const { options, name, label, hint, className } = this.props;
 
-    const jsx_array = [];
-    options.forEach((option, key) => {
-      jsx_array.push(
-        <Radio name={name} key={key} className={key === 0 ? style : null}>
+    const jsx_array = options.map((option, key) => {
+      return (
+        <Radio
+          name={name}
+          key={key}
+          className={key === 0 ? style : null}
+          disabled={option.disabled == "true" ? "disabled" : null}
+        >
           {option.display_text}
         </Radio>
       );

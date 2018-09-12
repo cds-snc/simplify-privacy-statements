@@ -47,7 +47,7 @@ export class Index extends Component {
 
       if ("multiple_choice_options" in q) {
         q.options = reduxState.multiple_choice_options.filter(x => {
-          return q.multiple_choice_options.indexOf(x.record_id) > -1;
+          return q.multiple_choice_options.indexOf(x.id) > -1;
         });
       }
 
