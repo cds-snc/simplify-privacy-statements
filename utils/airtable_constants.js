@@ -1,6 +1,7 @@
 exports.tableNames = [
   "template",
   "questions",
-  "agreement_logic",
+  "template_1",
+  "template_2",
   "multiple_choice_options"
 ];
