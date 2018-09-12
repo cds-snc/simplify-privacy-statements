@@ -23,6 +23,12 @@ export const reducer = (state = initialState, action) => {
         newState[tableName] = action.data[tableName] || state[tableName];
       });
       newState["errors"] = action.data["errors"] || state["errors"];
+
+      // set default values for questions
+      action.data.questions.map(question => {
+        newState[question.variable_name] = `[${question.variable_name}]`;
+      });
+
       return Object.assign({}, state, newState);
     case "SAVE_INPUT_DATA":
       newState = {};

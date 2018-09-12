@@ -1,1 +1,1 @@
-exports.tableNames = ["template", "variables", "questions"];
+exports.tableNames = ["template", "questions"];
