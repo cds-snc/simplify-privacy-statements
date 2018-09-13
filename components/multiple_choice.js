@@ -59,7 +59,8 @@ MultipleChoice.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   hint: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  store: PropTypes.object
 };
 
 export default connect(

@@ -62,6 +62,7 @@ export class Index extends Component {
             options={q.options}
             className={form_group}
             key={key}
+            store={this.props.store}
           />
         );
       }
@@ -97,7 +98,8 @@ const mapDispatchToProps = dispatch => {
 
 Index.propTypes = {
   reduxState: PropTypes.object,
-  saveInputData: PropTypes.func
+  saveInputData: PropTypes.func,
+  store: PropTypes.object
 };
 
 export default connect(
