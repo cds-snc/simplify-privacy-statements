@@ -21,9 +21,9 @@ export class MultipleChoice extends Component {
           className={key === 0 ? style : null}
           disabled={option.disabled == "true" ? "disabled" : null}
           onClick={() => {
-            this.props.saveInputData({ [name]: option.id });
+            this.props.saveInputData({ [name]: option.variable_name });
           }}
-          checked={option.id === reduxState[name] ? true : null}
+          checked={option.variable_name === reduxState[name] ? true : null}
         >
           {option.display_text}
         </Radio>

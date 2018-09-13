@@ -27,12 +27,12 @@ describe("MultiChoice", () => {
       .first()
       .simulate("click");
     expect(props.saveInputData).toBeCalledWith({
-      [props.name]: props.options[0].id
+      [props.name]: props.options[0].variable_name
     });
   });
 
   it("option is selected if it is in redux", async () => {
-    props.reduxState["asdf"] = props.options[1].id;
+    props.reduxState["asdf"] = props.options[1].variable_name;
 
     expect(
       mount(<MultipleChoice {...props} />)
