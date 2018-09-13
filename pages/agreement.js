@@ -6,6 +6,7 @@ import JsxParser from "react-jsx-parser";
 import PropTypes from "prop-types";
 import { css } from "react-emotion";
 import MarkdownIt from "markdown-it";
+import Layout from "../components/layout";
 
 const button = css`
   display: inline;
@@ -84,7 +85,7 @@ export class Agreement extends Component {
     });
 
     return (
-      <div>
+      <Layout>
         <div>
           <Link href="/">
             <Button className={button}>Home</Button>
@@ -95,7 +96,7 @@ export class Agreement extends Component {
         </div>
         <h1>Agreement</h1>
         {jsx_array}
-      </div>
+      </Layout>
     );
   }
 }

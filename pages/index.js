@@ -7,12 +7,7 @@ import Link from "next/link";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MultipleChoice from "../components/multiple_choice";
-
-const page_wrapper = css`
-  margin: 0 auto;
-  max-width: 800px;
-  font-family: "nta", Arial, sans-serif;
-`;
+import Layout from "../components/layout";
 
 const form_group = css`
   margin-bottom: 30px !important;
@@ -69,7 +64,7 @@ export class Index extends Component {
     });
 
     return (
-      <div className={page_wrapper}>
+      <Layout>
         <h1>Generate a Simple Privacy Statement</h1>
 
         {jsx_array}
@@ -77,7 +72,7 @@ export class Index extends Component {
         <Link href="/agreement">
           <Button>Submit</Button>
         </Link>
-      </div>
+      </Layout>
     );
   }
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Button from "@govuk-react/button";
 import PropTypes from "prop-types";
 import { css } from "react-emotion";
+import Layout from "../components/layout";
 
 const button = css`
   display: inline;
@@ -33,7 +34,7 @@ export class Validation extends Component {
     );
 
     return (
-      <div>
+      <Layout>
         <div>
           <Link href="/">
             <Button className={button}>Home</Button>
@@ -48,7 +49,7 @@ export class Validation extends Component {
             return <li key={v}>{v}</li>;
           })}
         </ul>
-      </div>
+      </Layout>
     );
   }
 }
