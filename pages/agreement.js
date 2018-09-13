@@ -10,7 +10,8 @@ import Layout from "../components/layout";
 
 const button = css`
   display: inline;
-  margin: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
 `;
 
 export class Agreement extends Component {
