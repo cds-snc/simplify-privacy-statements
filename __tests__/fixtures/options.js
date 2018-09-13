@@ -1,23 +1,23 @@
 const optionsFixture = [
   {
-    questions: ["rec0aV8zfp1HE5iF3"],
+    questions: ["q-confidentiality"],
     display_text: "Confidential",
     variable_name: "confidential",
-    id: "recS02qjfbhk41Y58",
+    id: "o-confidential",
     disabled: "false"
   },
   {
-    questions: ["rec0aV8zfp1HE5iF3"],
+    questions: ["q-confidentiality"],
     display_text: "Anonymous",
     variable_name: "anonymous",
-    id: "recEyUqGaNBQsXFjA",
+    id: "o-anonymous",
     disabled: "false"
   },
   {
-    questions: ["rec0aV8zfp1HE5iF3"],
+    questions: ["q-confidentiality"],
     display_text: "Anonymized",
     variable_name: "anonymized",
-    id: "recfpqt5mI1r3hJby",
+    id: "o-anonymized",
     disabled: "false"
   }
 ];

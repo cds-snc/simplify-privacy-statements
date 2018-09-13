@@ -13,13 +13,65 @@ const button = css`
 `;
 
 export class Agreement extends Component {
+  nameForId = (sheet, id) => {
+    let row = sheet.filter(r => r.id === id)[0];
+    if (row) {
+      return row.variable_name;
+    }
+    return null;
+  };
+
+  evaluateRowConditions = (row, variables, options, userValues) => {
+    const { logic_type, variable_1, test, variable_2 } = row;
+
+    if (logic_type === "none") {
+      return true;
+    }
+    if (variable_1 === undefined || variable_2 === undefined) {
+      return false;
+    }
+
+    let returnValue = false;
+    const v1Name = this.nameForId(variables, variable_1[0]);
+    const v1Value = userValues[v1Name];
+    const v2Values = variable_2.map(v => this.nameForId(options, v));
+
+    if (logic_type === "if" && test === "in_list") {
+      v2Values.forEach(v2 => {
+        if (v1Value === v2) {
+          returnValue = true;
+        }
+      });
+    }
+
+    if (row.logic_type === "if" && test === "equals") {
+      if (v2Values.length === 1 && v1Value === v2Values[0]) {
+        returnValue = true;
+      }
+    }
+
+    if (row.logic_type === "if" && test === "does_not_equal") {
+      if (v2Values.length === 1 && v1Value !== v2Values[0]) {
+        returnValue = true;
+      }
+    }
+    return returnValue;
+  };
+
   render() {
     const { reduxState } = this.props;
 
     let md = new MarkdownIt({ breaks: true });
 
-    const jsx_array = reduxState.template_1.map((row, key) => {
-      if (row.logic_type === "none") {
+    const jsx_array = reduxState.template_2.map((row, key) => {
+      if (
+        this.evaluateRowConditions(
+          row,
+          reduxState.questions,
+          reduxState.multiple_choice_options,
+          reduxState
+        )
+      ) {
         return (
           <JsxParser
             bindings={reduxState}
