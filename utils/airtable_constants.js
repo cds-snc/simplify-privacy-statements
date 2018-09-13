@@ -1,7 +1,1 @@
-exports.tableNames = [
-  "template",
-  "questions",
-  "template_1",
-  "template_2",
-  "multiple_choice_options"
-];
+exports.tableNames = ["template", "questions", "multiple_choice_options"];

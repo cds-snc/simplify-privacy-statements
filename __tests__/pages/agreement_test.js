@@ -10,7 +10,7 @@ describe("Agreement", () => {
 
   beforeEach(() => {
     props = {
-      reduxState: { template_2: [{ logic_type: "none", display_text: "" }] }
+      reduxState: { template: [{ logic_type: "none", display_text: "" }] }
     };
   });
 

@@ -63,7 +63,7 @@ export class Agreement extends Component {
 
     let md = new MarkdownIt({ breaks: true });
 
-    const jsx_array = reduxState.template_2.map((row, key) => {
+    const jsx_array = reduxState.template.map((row, key) => {
       if (
         this.evaluateRowConditions(
           row,
