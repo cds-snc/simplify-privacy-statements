@@ -21,9 +21,7 @@ const form_group = css`
 export class Index extends Component {
   getOnChange = input_name => {
     const onChange = e => {
-      const obj = {};
-      obj[input_name] = e.target.value;
-      this.props.saveInputData(obj);
+      this.props.saveInputData({ [input_name]: e.target.value });
     };
     return onChange;
   };
