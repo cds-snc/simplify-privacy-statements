@@ -1,5 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
+import templateFixture from "../fixtures/template";
 
 import { Validation } from "../../pages/validation";
 
@@ -8,8 +9,12 @@ describe("Validation", () => {
 
   beforeEach(() => {
     props = {
-      template: [{ template: "" }],
-      reduxState: {}
+      reduxState: {
+        template: templateFixture,
+        researcher_name: "name",
+        researcher_email: "email",
+        researcher_phone: "phone"
+      }
     };
   });
 
@@ -17,12 +22,27 @@ describe("Validation", () => {
     mount(<Validation {...props} />);
   });
 
-  it("has a correct missingVariables function", async () => {
-    const instance = mount(<Validation {...props} />).instance();
-    const actual = instance.missingVariables("{a} b a {b} {b} {a} c d {c}", {
-      a: "",
-      c: ""
+  describe("missingTemplateVariables", () => {
+    it("works if none missing", () => {
+      const template = props.reduxState.template;
+      const reduxState = props.reduxState;
+      const instance = mount(<Validation {...props} />).instance();
+      expect(instance.missingTemplateVariables(template, reduxState)).toEqual(
+        []
+      );
     });
-    expect(actual).toEqual(["b"]);
+
+    it("works if variable missing", () => {
+      const template = props.reduxState.template;
+      const reduxState = props.reduxState;
+      delete reduxState.researcher_name;
+      const instance = mount(<Validation {...props} />).instance();
+      expect(instance.missingTemplateVariables(template, reduxState)).toEqual([
+        {
+          rowIndex: 1,
+          variable: "researcher_name"
+        }
+      ]);
+    });
   });
 });

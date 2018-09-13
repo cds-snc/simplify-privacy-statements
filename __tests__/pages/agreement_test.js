@@ -4,13 +4,18 @@ import { mount } from "enzyme";
 import { Agreement } from "../../pages/agreement";
 import optionsFixture from "../fixtures/options";
 import questionsFixture from "../fixtures/questions";
+import templateFixture from "../fixtures/template";
 
 describe("Agreement", () => {
   let props;
 
   beforeEach(() => {
     props = {
-      reduxState: { template: [{ logic_type: "none", display_text: "" }] }
+      reduxState: {
+        template: templateFixture,
+        questions: questionsFixture,
+        multiple_choice_options: optionsFixture
+      }
     };
   });
 

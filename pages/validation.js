@@ -8,27 +8,48 @@ import Layout from "../components/layout";
 
 const button = css`
   display: inline;
-  margin: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
 `;
 
 export class Validation extends Component {
-  missingVariables = (template, reduxState) => {
-    const regex = /{\S*}/g;
-    const matches = template.match(regex);
-    const templateVariables = matches
-      ? matches.map(s => s.replace(/}|{/g, ""))
-      : [];
-    return templateVariables
-      .filter(v => reduxState[v] === undefined)
-      .filter((v, index, self) => self.indexOf(v) === index);
+  missingTemplateVariables = (template, reduxState) => {
+    let allVariables = [];
+    const variableRegex = /{\S*}/g;
+    template.forEach((row, index) => {
+      const text = row.display_text;
+      const matches = text.match(variableRegex);
+      if (matches) {
+        allVariables = allVariables.concat(
+          matches.map(m => {
+            return { variable: m.replace(/}|{/g, ""), rowIndex: index };
+          })
+        );
+      }
+    });
+
+    let missing_variables = allVariables.filter(
+      v => reduxState[v.variable] === undefined
+    );
+
+    let valuesSeen = {};
+    missing_variables = missing_variables.filter(v => {
+      const hash = `${v.rowIndex} - ${v.variable}`;
+      if (valuesSeen[hash] === undefined) {
+        valuesSeen[hash] = hash;
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return missing_variables.sort((a, b) => a.rowIndex - b.rowIndex);
   };
 
   render() {
     const { reduxState } = this.props;
+    const template = reduxState.template;
 
-    let template = this.props.template[0].template;
-
-    const missingTemplateVariables = this.missingVariables(
+    const missingTemplateVariables = this.missingTemplateVariables(
       template,
       reduxState
     );
@@ -46,7 +67,11 @@ export class Validation extends Component {
         <h1>Variables in template but missing from redux</h1>
         <ul>
           {missingTemplateVariables.map(v => {
-            return <li key={v}>{v}</li>;
+            return (
+              <li key={v.variable}>
+                row {v.rowIndex + 1}: {v.variable}
+              </li>
+            );
           })}
         </ul>
       </Layout>
@@ -56,14 +81,12 @@ export class Validation extends Component {
 
 const mapStateToProps = reduxState => {
   return {
-    reduxState: reduxState,
-    template: reduxState.template
+    reduxState: reduxState
   };
 };
 
 Validation.propTypes = {
-  reduxState: PropTypes.object,
-  template: PropTypes.array.isRequired
+  reduxState: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(Validation);
