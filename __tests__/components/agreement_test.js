@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { Agreement } from "../../pages/agreement";
+import { Agreement } from "../../components/agreement";
 import optionsFixture from "../fixtures/options";
 import questionsFixture from "../fixtures/questions";
 import templateFixture from "../fixtures/template";

@@ -1,18 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Link from "next/link";
-import Button from "@govuk-react/button";
 import JsxParser from "react-jsx-parser";
 import PropTypes from "prop-types";
-import { css } from "react-emotion";
 import MarkdownIt from "markdown-it";
-import Layout from "../components/layout";
-
-const button = css`
-  display: inline;
-  margin-right: 10px;
-  margin-top: 10px;
-`;
 
 export class Agreement extends Component {
   nameForId = (sheet, id) => {
@@ -80,23 +70,8 @@ export class Agreement extends Component {
 
     const jsxString = md.render(finalTemplate).replace(/<br>/g, "<br/>");
 
-    const jsx = (
-      <JsxParser bindings={reduxState} components={{}} jsx={jsxString} />
-    );
-
     return (
-      <Layout>
-        <div>
-          <Link href="/">
-            <Button className={button}>Home</Button>
-          </Link>
-          <Link href="/validation">
-            <Button className={button}>Validation</Button>
-          </Link>
-        </div>
-        <h1>Agreement</h1>
-        {jsx}
-      </Layout>
+        <JsxParser bindings={reduxState} components={{}} jsx={jsxString} />
     );
   }
 }

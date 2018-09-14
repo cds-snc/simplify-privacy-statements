@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 
 const page_wrapper = css`
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 1600px;
   font-family: "nta", Arial, sans-serif;
+  padding-top: 0px;
+  padding-bottom: 0px;
 `;
 export class Layout extends Component {
   render() {
