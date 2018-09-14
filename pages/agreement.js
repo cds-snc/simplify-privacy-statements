@@ -63,27 +63,26 @@ export class Agreement extends Component {
   render() {
     const { reduxState } = this.props;
 
-    let md = new MarkdownIt({ breaks: true });
-
-    const jsx_array = reduxState.template.map((row, key) => {
-      if (
+    const finalTemplate = reduxState.template
+      .filter(row =>
         this.evaluateRowConditions(
           row,
           reduxState.questions,
           reduxState.multiple_choice_options,
           reduxState
         )
-      ) {
-        return (
-          <JsxParser
-            bindings={reduxState}
-            components={{}}
-            jsx={md.render(row.display_text).replace(/<br>/g, "<br/>")}
-            key={key}
-          />
-        );
-      }
-    });
+      )
+      .map(row => row.display_text)
+      .map(s => s.replace(/^\*\s/, "\n* "))
+      .join("");
+
+    let md = new MarkdownIt({ breaks: true });
+
+    const jsxString = md.render(finalTemplate).replace(/<br>/g, "<br/>");
+
+    const jsx = (
+      <JsxParser bindings={reduxState} components={{}} jsx={jsxString} />
+    );
 
     return (
       <Layout>
@@ -96,7 +95,7 @@ export class Agreement extends Component {
           </Link>
         </div>
         <h1>Agreement</h1>
-        {jsx_array}
+        {jsx}
       </Layout>
     );
   }
