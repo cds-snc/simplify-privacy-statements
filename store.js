@@ -17,12 +17,21 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOAD_DATA":
       newState = {
-        timestamp: action.data.timestamp || state.timestamp
+        timestamp:
+          action.data.timestamp !== undefined
+            ? action.data.timestamp
+            : state.timestamp
       };
       airtableConstants.tableNames.forEach(tableName => {
-        newState[tableName] = action.data[tableName] || state[tableName];
+        newState[tableName] =
+          action.data[tableName] !== undefined
+            ? action.data[tableName]
+            : state[tableName];
       });
-      newState["errors"] = action.data["errors"] || state["errors"];
+      newState["errors"] =
+        action.data["errors"] !== undefined
+          ? action.data["errors"]
+          : state["errors"];
 
       // set default values for questions
       action.data.questions.map(question => {
@@ -37,9 +46,13 @@ export const reducer = (state = initialState, action) => {
         if (!state[key]) {
           state[key] = "";
         }
-        newState[key] = action.data[key] || state[key];
+        newState[key] =
+          action.data[key] !== undefined ? action.data[key] : state[key];
       });
-      newState["errors"] = action.data["errors"] || state["errors"];
+      newState["errors"] =
+        action.data["errors"] !== undefined
+          ? action.data["errors"] !== undefined
+          : state["errors"];
       return Object.assign({}, state, newState);
     default:
       return state;
