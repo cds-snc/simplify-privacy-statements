@@ -6,13 +6,6 @@ import Questionaire from "../components/questionaire";
 import Agreement from "../components/agreement";
 import Header from "../components/header";
 
-// Scrolling boxes styling taken from https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
-
-const body = css`
-  overflow-x: hidden;
-  padding: 0;
-  margin: 0;
-`;
 const Container = css`
   display: flex;
   overflow: hidden;
@@ -21,6 +14,7 @@ const Container = css`
   padding-top: 100px;
   position: relative;
   width: 100%;
+  top: 0px;
   backface-visibility: hidden;
   will-change: overflow;
 `;
@@ -42,19 +36,16 @@ export class Index extends Component {
   render() {
     return (
       <Layout>
-        <div className={body}>
-          <Header />
+        <Header />
+        <div className={Container}>
+          <div className={cx(LeftRight, Left)}>
+            <h2>Questionaire</h2>
+            <Questionaire store={this.props.store} />
+          </div>
 
-          <div className={Container}>
-            <div className={cx(LeftRight, Left)}>
-              <h2>Questionaire</h2>
-              <Questionaire store={this.props.store} />
-            </div>
-
-            <div className={cx(LeftRight, Right)}>
-              <h2>Agreement</h2>
-              <Agreement store={this.props.store} />
-            </div>
+          <div className={cx(LeftRight, Right)}>
+            <h2>Agreement</h2>
+            <Agreement store={this.props.store} />
           </div>
         </div>
       </Layout>

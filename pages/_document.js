@@ -4,7 +4,15 @@ import { extractCritical } from "emotion-server";
 import flush from "styled-jsx/server";
 
 const bodyStyling = {
-  fontFamily: `"nta", Arial, sans-serif`
+  fontFamily: `"nta", Arial, sans-serif`,
+  padding: 0,
+  margin: 0,
+  overflowX: "hidden"
+};
+
+const htmlStyling = {
+  padding: 0,
+  margin: 0
 };
 
 class MyDocument extends Document {
@@ -38,7 +46,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <html lang="en">
+      <html lang="en" style={htmlStyling}>
         <Head>
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
         </Head>
