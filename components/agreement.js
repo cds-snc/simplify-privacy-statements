@@ -62,7 +62,12 @@ export class Agreement extends Component {
           reduxState
         )
       )
-      .map(row => row.display_text)
+      .map(
+        row =>
+          this.props.showSection && row.section_name !== undefined
+            ? `**[${row.section_name}]**\n ${row.display_text}`
+            : row.display_text
+      )
       .map(s => s.replace(/^\*\s/, "\n* "))
       .join("");
 
@@ -70,9 +75,7 @@ export class Agreement extends Component {
 
     const jsxString = md.render(finalTemplate).replace(/<br>/g, "<br/>");
 
-    return (
-        <JsxParser bindings={reduxState} components={{}} jsx={jsxString} />
-    );
+    return <JsxParser bindings={reduxState} components={{}} jsx={jsxString} />;
   }
 }
 
@@ -83,7 +86,8 @@ const mapStateToProps = reduxState => {
 };
 
 Agreement.propTypes = {
-  reduxState: PropTypes.object
+  reduxState: PropTypes.object,
+  showSection: PropTypes.bool
 };
 
 export default connect(mapStateToProps)(Agreement);

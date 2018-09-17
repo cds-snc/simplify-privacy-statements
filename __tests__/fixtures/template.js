@@ -1,7 +1,8 @@
 const templateFixture = [
   {
     logic_type: "none",
-    display_text: "text1"
+    display_text: "text1",
+    section_name: "section_1"
   },
   {
     logic_type: "none",
