@@ -1,16 +1,16 @@
 import React from "react";
 import { mount } from "enzyme";
-import Header from "../../components/header";
+import Layout from "../../components/layout";
 const { axe, toHaveNoViolations } = require("jest-axe");
 expect.extend(toHaveNoViolations);
 
-describe("Header", () => {
+describe("Layout", () => {
   it("renders", async () => {
-    mount(<Header />);
+    mount(<Layout />);
   });
 
   it("passes axe tests", async () => {
-    let html = mount(<Header />).html();
+    let html = mount(<Layout />).html();
     expect(await axe(html)).toHaveNoViolations();
   });
 });

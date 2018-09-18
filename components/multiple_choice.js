@@ -17,6 +17,7 @@ export class MultipleChoice extends Component {
       return (
         <Radio
           name={name}
+          id={option.variable_name + key}
           key={key}
           className={key === 0 ? style : null}
           disabled={option.disabled == "true" ? "disabled" : null}
@@ -33,8 +34,10 @@ export class MultipleChoice extends Component {
     });
 
     return (
-      <MultiChoice label={label} hint={hint} className={className}>
-        {jsx_array}
+      <MultiChoice id={name} label={label} hint={hint} className={className}>
+        <div role="radiogroup" aria-labelledby={name}>
+          {jsx_array}
+        </div>
       </MultiChoice>
     );
   }

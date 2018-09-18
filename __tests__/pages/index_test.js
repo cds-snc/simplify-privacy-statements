@@ -5,6 +5,8 @@ import { Index } from "../../pages/index";
 import questionsFixture from "../fixtures/questions";
 import optionsFixture from "../fixtures/options";
 import templateFixture from "../fixtures/template";
+const { axe, toHaveNoViolations } = require("jest-axe");
+expect.extend(toHaveNoViolations);
 
 describe("Index", () => {
   let props, mockStore, reduxState;
@@ -23,5 +25,10 @@ describe("Index", () => {
 
   it("renders", async () => {
     mount(<Index {...props} />);
+  });
+
+  it("passes axe tests", async () => {
+    let html = mount(<Index {...props} />).html();
+    expect(await axe(html)).toHaveNoViolations();
   });
 });

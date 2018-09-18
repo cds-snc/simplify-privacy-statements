@@ -5,6 +5,8 @@ import { Agreement } from "../../components/agreement";
 import optionsFixture from "../fixtures/options";
 import questionsFixture from "../fixtures/questions";
 import templateFixture from "../fixtures/template";
+const { axe, toHaveNoViolations } = require("jest-axe");
+expect.extend(toHaveNoViolations);
 
 describe("Agreement", () => {
   let props;
@@ -21,6 +23,11 @@ describe("Agreement", () => {
 
   it("renders", async () => {
     mount(<Agreement {...props} />);
+  });
+
+  it("passes axe tests", async () => {
+    let html = mount(<Agreement {...props} />).html();
+    expect(await axe(html)).toHaveNoViolations();
   });
 
   it("shows the section name appropriately", async () => {

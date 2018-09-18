@@ -33,7 +33,9 @@ export class Questionaire extends Component {
       const props = {
         className: form_group,
         name: q.variable_name,
+        htmlFor: q.variable_name,
         input: {
+          id: q.variable_name,
           onChange: this.getOnChange(q.variable_name),
           onFocus: this.getOnFocus(q.variable_name),
           value: reduxState[q.variable_name]

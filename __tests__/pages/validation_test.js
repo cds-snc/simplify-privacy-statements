@@ -1,8 +1,9 @@
 import React from "react";
 import { mount } from "enzyme";
 import templateFixture from "../fixtures/template";
-
 import { Validation } from "../../pages/validation";
+const { axe, toHaveNoViolations } = require("jest-axe");
+expect.extend(toHaveNoViolations);
 
 describe("Validation", () => {
   let props;
@@ -20,6 +21,11 @@ describe("Validation", () => {
 
   it("renders", async () => {
     mount(<Validation {...props} />);
+  });
+
+  it("passes axe tests", async () => {
+    let html = mount(<Validation {...props} />).html();
+    expect(await axe(html)).toHaveNoViolations();
   });
 
   describe("missingTemplateVariables", () => {

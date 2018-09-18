@@ -2,6 +2,8 @@ import React from "react";
 import { mount } from "enzyme";
 import { MultipleChoice } from "../../components/multiple_choice";
 import optionsFixture from "../fixtures/options";
+const { axe, toHaveNoViolations } = require("jest-axe");
+expect.extend(toHaveNoViolations);
 
 describe("MultiChoice", () => {
   let props;
@@ -20,6 +22,11 @@ describe("MultiChoice", () => {
 
   it("renders", async () => {
     mount(<MultipleChoice {...props} />);
+  });
+
+  it("passes axe tests", async () => {
+    let html = mount(<MultipleChoice {...props} />).html();
+    expect(await axe(html)).toHaveNoViolations();
   });
 
   it("saves clicked value to redux", async () => {

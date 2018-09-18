@@ -6,6 +6,8 @@ import questionsFixture from "../fixtures/questions";
 import optionsFixture from "../fixtures/options";
 import configureStore from "redux-mock-store";
 import templateFixture from "../fixtures/template";
+const { axe, toHaveNoViolations } = require("jest-axe");
+expect.extend(toHaveNoViolations);
 
 describe("TemplateEditing", () => {
   let props, mockStore, reduxState;
@@ -24,5 +26,10 @@ describe("TemplateEditing", () => {
 
   it("renders", async () => {
     mount(<TemplateEditing {...props} />);
+  });
+
+  it("passes axe tests", async () => {
+    let html = mount(<TemplateEditing {...props} />).html();
+    expect(await axe(html)).toHaveNoViolations();
   });
 });
