@@ -13,7 +13,8 @@ describe("MultiChoice", () => {
       label: "asdf",
       hint: "asdf",
       reduxState: { asdf: "rec0aV8zfp1HE5iF3" },
-      saveInputData: jest.fn()
+      saveInputData: jest.fn(),
+      saveVariableSelected: jest.fn()
     };
   });
 
@@ -28,6 +29,16 @@ describe("MultiChoice", () => {
       .simulate("click");
     expect(props.saveInputData).toBeCalledWith({
       [props.name]: props.options[0].variable_name
+    });
+  });
+
+  it("saves clicked variable to redux", async () => {
+    mount(<MultipleChoice {...props} />)
+      .find("input")
+      .first()
+      .simulate("click");
+    expect(props.saveVariableSelected).toBeCalledWith({
+      variableSelected: props.name
     });
   });
 

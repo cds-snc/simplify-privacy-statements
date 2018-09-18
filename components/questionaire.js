@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import Button from "@govuk-react/button";
 import { css } from "react-emotion";
 import InputField from "@govuk-react/input-field";
 import TextArea from "@govuk-react/text-area";
-import Link from "next/link";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MultipleChoice from "../components/multiple_choice";
-import Layout from "../components/layout";
 const form_group = css`
   margin-bottom: 30px !important;
 `;
@@ -18,6 +15,13 @@ export class Questionaire extends Component {
       this.props.saveInputData({ [input_name]: e.target.value });
     };
     return onChange;
+  };
+
+  getOnFocus = input_name => {
+    const onFocus = () => {
+      this.props.saveVariableSelected({ variableSelected: input_name });
+    };
+    return onFocus;
   };
 
   render() {
@@ -31,6 +35,7 @@ export class Questionaire extends Component {
         name: q.variable_name,
         input: {
           onChange: this.getOnChange(q.variable_name),
+          onFocus: this.getOnFocus(q.variable_name),
           value: reduxState[q.variable_name]
         },
         hint: q.hint,
@@ -62,11 +67,7 @@ export class Questionaire extends Component {
       }
     });
 
-    return (
-        <React.Fragment>
-        {jsx_array}
-        </React.Fragment>
-    );
+    return <React.Fragment>{jsx_array}</React.Fragment>;
   }
 }
 
@@ -80,6 +81,9 @@ const mapDispatchToProps = dispatch => {
   return {
     saveInputData: x => {
       dispatch({ type: "SAVE_INPUT_DATA", data: x });
+    },
+    saveVariableSelected: x => {
+      dispatch({ type: "SAVE_VARIABLE_SELECTED", data: x });
     }
   };
 };

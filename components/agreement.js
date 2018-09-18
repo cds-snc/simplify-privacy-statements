@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import JsxParser from "react-jsx-parser";
 import PropTypes from "prop-types";
 import MarkdownIt from "markdown-it";
+import VariableColouring from "./variable_colouring";
 
 export class Agreement extends Component {
   nameForId = (sheet, id) => {
@@ -50,6 +51,12 @@ export class Agreement extends Component {
     return returnValue;
   };
 
+  colouringFunction = (match, p1) => {
+    const variableSelected = this.props.reduxState.variableSelected;
+    const variableValue = this.props.reduxState[p1];
+    return `<VariableColouring variableSelected='${variableSelected}' variable='${p1}' variableValue='${variableValue}'/>`;
+  };
+
   render() {
     const { reduxState } = this.props;
 
@@ -73,9 +80,17 @@ export class Agreement extends Component {
 
     let md = new MarkdownIt({ breaks: true });
 
-    const jsxString = md.render(finalTemplate).replace(/<br>/g, "<br/>");
-
-    return <JsxParser bindings={reduxState} components={{}} jsx={jsxString} />;
+    let jsxString = md
+      .render(finalTemplate)
+      .replace(/<br>/g, "<br/>")
+      .replace(/\{(\S+)\}/g, this.colouringFunction);
+    return (
+      <JsxParser
+        bindings={reduxState}
+        components={{ VariableColouring }}
+        jsx={jsxString}
+      />
+    );
   }
 }
 

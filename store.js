@@ -2,6 +2,7 @@ import { createStore } from "redux";
 import airtableConstants from "./utils/airtable_constants";
 
 const initialState = {
+  variableSelected: "none",
   errors: ""
 };
 
@@ -54,6 +55,10 @@ export const reducer = (state = initialState, action) => {
           ? action.data["errors"] !== undefined
           : state["errors"];
       return Object.assign({}, state, newState);
+    case "SAVE_VARIABLE_SELECTED":
+      return Object.assign({}, state, {
+        variableSelected: action.data.variableSelected
+      });
     default:
       return state;
   }

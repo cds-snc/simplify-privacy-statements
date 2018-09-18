@@ -22,8 +22,10 @@ export class MultipleChoice extends Component {
           disabled={option.disabled == "true" ? "disabled" : null}
           onClick={() => {
             this.props.saveInputData({ [name]: option.variable_name });
+            this.props.saveVariableSelected({ variableSelected: name });
           }}
           checked={option.variable_name === reduxState[name] ? true : null}
+          onChange={() => {}} // remove jest warning
         >
           {option.display_text}
         </Radio>
@@ -48,6 +50,9 @@ const mapDispatchToProps = dispatch => {
   return {
     saveInputData: x => {
       dispatch({ type: "SAVE_INPUT_DATA", data: x });
+    },
+    saveVariableSelected: x => {
+      dispatch({ type: "SAVE_VARIABLE_SELECTED", data: x });
     }
   };
 };
@@ -55,6 +60,7 @@ const mapDispatchToProps = dispatch => {
 MultipleChoice.propTypes = {
   reduxState: PropTypes.object,
   saveInputData: PropTypes.func,
+  saveVariableSelected: PropTypes.func,
   options: PropTypes.array,
   name: PropTypes.string,
   label: PropTypes.string,
