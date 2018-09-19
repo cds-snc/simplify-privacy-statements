@@ -5,6 +5,8 @@ import TextArea from "@govuk-react/text-area";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MultipleChoice from "../components/multiple_choice";
+import evaluateRowConditions from "../utils/evaluate_row";
+
 const form_group = css`
   margin-bottom: 30px !important;
 `;
@@ -38,6 +40,14 @@ export class Questionaire extends Component {
       jsx_array.push(<h3 key={k1 + "-h3"}>{section_name}</h3>);
       questions
         .filter(q => q.section_name === section_name)
+        .filter(g =>
+          evaluateRowConditions(
+            g,
+            reduxState.questions,
+            reduxState.multiple_choice_options,
+            reduxState
+          )
+        )
         .forEach((q, k2) => {
           const props = {
             className: form_group,
