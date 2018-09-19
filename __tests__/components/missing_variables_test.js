@@ -1,49 +1,47 @@
 import React from "react";
 import { mount } from "enzyme";
 import templateFixture from "../fixtures/template";
-import { Validation } from "../../pages/validation";
+import { MissingVariables } from "../../components/missing_variables";
 const { axe, toHaveNoViolations } = require("jest-axe");
 expect.extend(toHaveNoViolations);
 
-describe("Validation", () => {
+describe("MissingVariables", () => {
   let props;
 
   beforeEach(() => {
     props = {
+      // missing researcher_name
       reduxState: {
         template: templateFixture,
-        researcher_name: "name",
         researcher_email: "email",
-        researcher_phone: "phone"
+        researcher_phone: "phone",
+        templateSelected: "template"
       }
     };
   });
 
   it("renders", async () => {
-    mount(<Validation {...props} />);
+    mount(<MissingVariables {...props} />);
   });
 
   it("passes axe tests", async () => {
-    let html = mount(<Validation {...props} />).html();
+    let html = mount(<MissingVariables {...props} />).html();
     expect(await axe(html)).toHaveNoViolations();
   });
 
-  describe("missingTemplateVariables", () => {
+  describe("function missingTemplateVariables", () => {
     it("works if none missing", () => {
-      const template = props.reduxState.template;
+      props.reduxState.researcher_name = "name";
       const reduxState = props.reduxState;
-      const instance = mount(<Validation {...props} />).instance();
-      expect(instance.missingTemplateVariables(template, reduxState)).toEqual(
-        []
-      );
+      const instance = mount(<MissingVariables {...props} />).instance();
+      expect(instance.missingTemplateVariables(reduxState)).toEqual([]);
     });
 
     it("works if variable missing", () => {
-      const template = props.reduxState.template;
       const reduxState = props.reduxState;
       delete reduxState.researcher_name;
-      const instance = mount(<Validation {...props} />).instance();
-      expect(instance.missingTemplateVariables(template, reduxState)).toEqual([
+      const instance = mount(<MissingVariables {...props} />).instance();
+      expect(instance.missingTemplateVariables(reduxState)).toEqual([
         {
           rowIndex: 1,
           variable: "researcher_name"

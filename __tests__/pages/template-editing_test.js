@@ -18,7 +18,8 @@ describe("TemplateEditing", () => {
     reduxState = {
       questions: questionsFixture,
       multiple_choice_options: optionsFixture,
-      template: templateFixture
+      template: templateFixture,
+      templateSelected: "template"
     };
     props.reduxState = reduxState;
     props.store = mockStore(reduxState);

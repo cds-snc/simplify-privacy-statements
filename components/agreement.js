@@ -4,6 +4,7 @@ import JsxParser from "react-jsx-parser";
 import PropTypes from "prop-types";
 import MarkdownIt from "markdown-it";
 import VariableColouring from "./variable_colouring";
+import MissingVariables from "./missing_variables";
 import evaluateRowConditions from "../utils/evaluate_row";
 
 var airtableConstants = require("../utils/airtable_constants");
@@ -43,7 +44,7 @@ export class Agreement extends Component {
         )
         .map(
           row =>
-            this.props.showSection && row.section_name !== undefined
+            this.props.editingMode && row.section_name !== undefined
               ? `**[${row.section_name}]**\n ${row.display_text}`
               : row.display_text
         )
@@ -61,6 +62,9 @@ export class Agreement extends Component {
       .replace(/\{(\S+)\}/g, this.colouringFunction);
     return (
       <div>
+        {this.props.editingMode ? (
+          <MissingVariables store={this.props.store} />
+        ) : null}
         <JsxParser
           bindings={reduxState}
           components={{ VariableColouring }}
@@ -79,7 +83,8 @@ const mapStateToProps = reduxState => {
 
 Agreement.propTypes = {
   reduxState: PropTypes.object,
-  showSection: PropTypes.bool
+  editingMode: PropTypes.bool,
+  store: PropTypes.object
 };
 
 export default connect(mapStateToProps)(Agreement);

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Link from "next/link";
-import Button from "@govuk-react/button";
 import PropTypes from "prop-types";
 import { css } from "react-emotion";
-import Layout from "../components/layout";
 
-const button = css`
-  display: inline;
-  margin-right: 10px;
-  margin-top: 10px;
+const root = css`
+  border-style: solid;
+  border-color: red;
+  border-radius: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
-export class Validation extends Component {
-  missingTemplateVariables = (template, reduxState) => {
+export class MissingVariables extends Component {
+  missingTemplateVariables = reduxState => {
+    const template = reduxState[reduxState.templateSelected];
     let allVariables = [];
     const variableRegex = /{\S*}/g;
     template.forEach((row, index) => {
@@ -47,35 +47,26 @@ export class Validation extends Component {
 
   render() {
     const { reduxState } = this.props;
-    const template = reduxState.template;
+    const missingTemplateVariables = this.missingTemplateVariables(reduxState);
 
-    const missingTemplateVariables = this.missingTemplateVariables(
-      template,
-      reduxState
-    );
-
-    return (
-      <Layout>
-        <div>
-          <Link href="/">
-            <Button className={button}>Home</Button>
-          </Link>
-          <Link href="/agreement">
-            <Button className={button}>Agreement</Button>
-          </Link>
+    if (missingTemplateVariables.length > 0) {
+      return (
+        <div className={root}>
+          <h2>Variables in Template but missing from Questions</h2>
+          <ul>
+            {missingTemplateVariables.map(v => {
+              return (
+                <li key={v.variable}>
+                  template row {v.rowIndex + 1}: {v.variable}
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <h1>Variables in template but missing from redux</h1>
-        <ul>
-          {missingTemplateVariables.map(v => {
-            return (
-              <li key={v.variable}>
-                row {v.rowIndex + 1}: {v.variable}
-              </li>
-            );
-          })}
-        </ul>
-      </Layout>
-    );
+      );
+    } else {
+      return null;
+    }
   }
 }
 
@@ -85,8 +76,9 @@ const mapStateToProps = reduxState => {
   };
 };
 
-Validation.propTypes = {
-  reduxState: PropTypes.object.isRequired
+MissingVariables.propTypes = {
+  reduxState: PropTypes.object.isRequired,
+  store: PropTypes.object
 };
 
-export default connect(mapStateToProps)(Validation);
+export default connect(mapStateToProps)(MissingVariables);

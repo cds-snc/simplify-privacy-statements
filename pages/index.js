@@ -75,7 +75,6 @@ export class Index extends Component {
               <a id="hidden_download_anchor" style={{ display: "none" }} />
               <div id="agreement">
                 <CdsLogo />
-                <h2>Agreement</h2>
                 <Agreement store={this.props.store} />
               </div>
             </div>

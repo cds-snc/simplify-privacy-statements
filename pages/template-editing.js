@@ -48,9 +48,6 @@ export class TemplateEditing extends Component {
           <Link href="/">
             <Button className={button}>Home</Button>
           </Link>
-          <Link href="/validation">
-            <Button className={button}>Missing Variables</Button>
-          </Link>
           <Link href="/refresh">
             <Button className={button}>Refresh Airtable</Button>
           </Link>
@@ -67,8 +64,7 @@ export class TemplateEditing extends Component {
               store={this.props.store}
               className={dropdownStyle}
             />
-            <h2>Agreement</h2>
-            <Agreement showSection store={this.props.store} />
+            <Agreement editingMode store={this.props.store} />
           </div>
         </div>
       </Layout>

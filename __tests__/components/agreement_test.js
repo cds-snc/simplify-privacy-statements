@@ -40,7 +40,7 @@ describe("Agreement", () => {
 
   it("shows the section name appropriately", async () => {
     expect(mount(<Agreement {...props} />).text()).not.toContain("section_1");
-    expect(mount(<Agreement showSection {...props} />).text()).toContain(
+    expect(mount(<Agreement editingMode {...props} />).text()).toContain(
       "section_1"
     );
   });
