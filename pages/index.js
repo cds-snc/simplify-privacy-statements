@@ -5,6 +5,9 @@ import Layout from "../components/layout";
 import Questionaire from "../components/questionaire";
 import Agreement from "../components/agreement";
 import Header from "../components/header";
+import Button from "@govuk-react/button";
+import htmlDocx from "html-docx-js/dist/html-docx";
+import CdsLogo from "../components/logo";
 
 const Container = css`
   display: flex;
@@ -33,6 +36,19 @@ const Right = css`
 `;
 
 export class Index extends Component {
+  getBlobUrl = () => {
+    if (window) {
+      var content = document.getElementById("agreement").innerHTML;
+      var myBlob = htmlDocx.asBlob(content);
+      var blobURL = window.URL.createObjectURL(myBlob);
+      var a = document.getElementById("hidden_download_anchor");
+      a.href = blobURL;
+      a.download = "agreement_" + Date.now().toString() + ".docx";
+      a.click();
+    }
+    return null;
+  };
+
   render() {
     return (
       <Layout>
@@ -44,8 +60,13 @@ export class Index extends Component {
           </div>
 
           <div className={cx(LeftRight, Right)}>
-            <h2>Agreement</h2>
-            <Agreement store={this.props.store} />
+            <div id="agreement">
+              <CdsLogo />
+              <h2>Agreement</h2>
+              <Agreement store={this.props.store} />
+            </div>
+            <Button onClick={this.getBlobUrl}>Download Word Doc</Button>
+            <a id="hidden_download_anchor" style={{ display: "none" }} />
           </div>
         </div>
       </Layout>
