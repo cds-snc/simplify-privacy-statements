@@ -8,6 +8,7 @@ import Header from "../components/header";
 import Button from "@govuk-react/button";
 import htmlDocx from "html-docx-js/dist/html-docx";
 import CdsLogo from "../components/logo";
+import TemplateDropdown from "../components/template_dropdown";
 
 const Container = css`
   display: flex;
@@ -33,6 +34,9 @@ const Left = css`
 `;
 const Right = css`
   flex: 1;
+`;
+const dropdownStyle = css`
+  margin-bottom: 10px;
 `;
 
 export class Index extends Component {
@@ -60,6 +64,10 @@ export class Index extends Component {
           </div>
 
           <div className={cx(LeftRight, Right)}>
+            <TemplateDropdown
+              className={dropdownStyle}
+              store={this.props.store}
+            />
             <div id="agreement">
               <CdsLogo />
               <h2>Agreement</h2>

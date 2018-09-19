@@ -6,6 +6,7 @@ import Button from "@govuk-react/button";
 import Layout from "../components/layout";
 import Questionaire from "../components/questionaire";
 import Agreement from "../components/agreement";
+import TemplateDropdown from "../components/template_dropdown";
 
 // Scrolling boxes styling taken from https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
 
@@ -36,7 +37,9 @@ const button = css`
   margin-right: 10px;
   margin-top: 10px;
 `;
-
+const dropdownStyle = css`
+  margin-bottom: 10px;
+`;
 export class TemplateEditing extends Component {
   render() {
     return (
@@ -60,6 +63,10 @@ export class TemplateEditing extends Component {
           </div>
 
           <div className={cx(LeftRight, Right)}>
+            <TemplateDropdown
+              store={this.props.store}
+              className={dropdownStyle}
+            />
             <h2>Agreement</h2>
             <Agreement showSection store={this.props.store} />
           </div>

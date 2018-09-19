@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-
+import configureStore from "redux-mock-store";
 import { Agreement } from "../../components/agreement";
 import optionsFixture from "../fixtures/options";
 import questionsFixture from "../fixtures/questions";
@@ -10,19 +10,23 @@ const { axe, toHaveNoViolations } = require("jest-axe");
 expect.extend(toHaveNoViolations);
 
 describe("Agreement", () => {
-  let props;
+  let props, mockStore, reduxState;
+
   const templateList = airtableConstants.tableNames.filter(
     tn => tn.toLowerCase().indexOf("template") !== -1
   );
 
   beforeEach(() => {
-    props = {
-      reduxState: {
-        [templateList[0]]: templateFixture,
-        questions: questionsFixture,
-        multiple_choice_options: optionsFixture
-      }
+    props = {};
+    mockStore = configureStore();
+    reduxState = {
+      [templateList[0]]: templateFixture,
+      questions: questionsFixture,
+      multiple_choice_options: optionsFixture,
+      templateSelected: templateList[0]
     };
+    props.reduxState = reduxState;
+    props.store = mockStore(reduxState);
   });
 
   it("renders", async () => {

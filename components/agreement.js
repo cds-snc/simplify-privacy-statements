@@ -4,8 +4,6 @@ import JsxParser from "react-jsx-parser";
 import PropTypes from "prop-types";
 import MarkdownIt from "markdown-it";
 import VariableColouring from "./variable_colouring";
-import LabelText from "@govuk-react/label-text";
-import { SelectInput } from "@govuk-react/select";
 import evaluateRowConditions from "../utils/evaluate_row";
 
 var airtableConstants = require("../utils/airtable_constants");
@@ -33,8 +31,8 @@ export class Agreement extends Component {
     const { reduxState } = this.props;
     let finalTemplate;
 
-    if (reduxState[this.state.templateName]) {
-      finalTemplate = reduxState[this.state.templateName]
+    if (reduxState[reduxState.templateSelected]) {
+      finalTemplate = reduxState[reduxState.templateSelected]
         .filter(row =>
           evaluateRowConditions(
             row,
@@ -63,21 +61,6 @@ export class Agreement extends Component {
       .replace(/\{(\S+)\}/g, this.colouringFunction);
     return (
       <div>
-        <label htmlFor="select template">
-          <LabelText>
-            Template:&nbsp;
-            <SelectInput id="select template" onChange={this.selectOnChange}>
-              {this.templateList.map(tn => {
-                return (
-                  <option key={tn} value={tn}>
-                    {tn}
-                  </option>
-                );
-              })}
-            </SelectInput>
-          </LabelText>
-        </label>
-
         <JsxParser
           bindings={reduxState}
           components={{ VariableColouring }}

@@ -9,6 +9,10 @@ const initialState = {
 airtableConstants.tableNames.forEach(tableName => {
   initialState[tableName] = [];
 });
+const templateList = airtableConstants.tableNames.filter(
+  tn => tn.toLowerCase().indexOf("template") !== -1
+);
+initialState["templateSelected"] = templateList[0];
 
 // REDUCERS
 export const reducer = (state = initialState, action) => {
@@ -58,6 +62,10 @@ export const reducer = (state = initialState, action) => {
     case "SAVE_VARIABLE_SELECTED":
       return Object.assign({}, state, {
         variableSelected: action.data.variableSelected
+      });
+    case "SAVE_TEMPLATE_SELECTED":
+      return Object.assign({}, state, {
+        templateSelected: action.data.templateSelected
       });
     default:
       return state;
