@@ -8,6 +8,8 @@ const page_wrapper = css`
   font-family: "nta", Arial, sans-serif;
   padding-top: 0px;
   padding-bottom: 0px;
+  height: 100%;
+  overflow-y: hidden !important;
 `;
 export class Layout extends Component {
   render() {

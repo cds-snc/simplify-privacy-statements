@@ -88,7 +88,20 @@ export class Questionaire extends Component {
           }
         });
     });
-    return <React.Fragment>{jsx_array}</React.Fragment>;
+    return (
+      <React.Fragment>
+        <p>
+          Tell us about the research you wish to conduct and this application
+          will generate a Privacy Statement form for you to give to your
+          participants and collect their consent.
+        </p>
+        <p>
+          Please read through all the conditions as you select your research
+          requirements.
+        </p>
+        {jsx_array}
+      </React.Fragment>
+    );
   }
 }
 

@@ -7,7 +7,10 @@ const bodyStyling = {
   fontFamily: `"nta", Arial, sans-serif`,
   padding: 0,
   margin: 0,
-  overflowX: "hidden"
+  overflowX: "hidden",
+  // overflowY: "hidden",
+  height: "100%",
+  boxSizing: "border-box"
 };
 
 const htmlStyling = {

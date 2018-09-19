@@ -11,11 +11,12 @@ import CdsLogo from "../components/logo";
 import TemplateDropdown from "../components/template_dropdown";
 
 const Container = css`
+  box-sizing: border-box;
   display: flex;
   overflow: hidden;
   height: 100vh;
-  margin-top: -100px;
-  padding-top: 100px;
+  margin-top: -80px;
+  padding-top: 80px;
   position: relative;
   width: 100%;
   top: 0px;
@@ -25,11 +26,12 @@ const Container = css`
 const LeftRight = css`
   overflow: auto;
   height: auto;
-  padding: 0.5rem;
+  padding: 2rem;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
 `;
 const Left = css`
+  box-sizing: border-box;
   width: 50%;
 `;
 const Right = css`
@@ -55,29 +57,31 @@ export class Index extends Component {
 
   render() {
     return (
-      <Layout>
+      <React.Fragment>
         <Header />
-        <div className={Container}>
-          <div className={cx(LeftRight, Left)}>
-            <h2>Questionaire</h2>
-            <Questionaire store={this.props.store} />
-          </div>
-
-          <div className={cx(LeftRight, Right)}>
-            <TemplateDropdown
-              className={dropdownStyle}
-              store={this.props.store}
-            />
-            <div id="agreement">
-              <CdsLogo />
-              <h2>Agreement</h2>
-              <Agreement store={this.props.store} />
+        <Layout>
+          <div className={Container}>
+            <div className={cx(LeftRight, Left)}>
+              <h2>Questionaire</h2>
+              <Questionaire store={this.props.store} />
             </div>
-            <Button onClick={this.getBlobUrl}>Download Word Doc</Button>
-            <a id="hidden_download_anchor" style={{ display: "none" }} />
+
+            <div className={cx(LeftRight, Right)}>
+              <TemplateDropdown
+                className={dropdownStyle}
+                store={this.props.store}
+              />
+              <Button onClick={this.getBlobUrl}>Download Word Doc</Button>
+              <a id="hidden_download_anchor" style={{ display: "none" }} />
+              <div id="agreement">
+                <CdsLogo />
+                <h2>Agreement</h2>
+                <Agreement store={this.props.store} />
+              </div>
+            </div>
           </div>
-        </div>
-      </Layout>
+        </Layout>
+      </React.Fragment>
     );
   }
 }

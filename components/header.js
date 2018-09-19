@@ -4,12 +4,14 @@ import { css } from "react-emotion";
 // Top taken from https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
 
 const Top = css`
+  box-sizing: border-box;
   align-items: center;
   justify-content: left;
   position: relative;
   z-index: 10;
-  padding: 24px;
+  padding-top: 24px;
   background-color: #000;
+  height: 80px;
 `;
 
 const H1 = css`
@@ -18,23 +20,21 @@ const H1 = css`
   margin: 0px;
 `;
 
-const Paragraph = css`
-  color: #fff;
-  margin: 10px 0px 0px 0px;
+const Container = css`
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 `;
 
 class Header extends Component {
   render() {
     return (
       <div className={Top}>
-        <h1 className={H1}>Privacy and Consent Form Generator</h1>
-        <p className={Paragraph}>
-          Tell us about the research you wish to conduct and this application
-          will generate a Privacy Statement form for you to give to your
-          participants and collect their consent. <br />
-          Please read through all the conditions as you select your research
-          requirements.
-        </p>
+        <div className={Container}>
+          <h1 className={H1}>Privacy and Consent Form Generator</h1>
+        </div>
       </div>
     );
   }
