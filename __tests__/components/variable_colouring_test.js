@@ -21,4 +21,27 @@ describe("VariableColouring", () => {
     props.variable = "something_else";
     mount(<VariableColouring {...props} />);
   });
+
+  describe("variableStatus function", () => {
+    it("detects selected variable", async () => {
+      const instance = mount(<VariableColouring {...props} />).instance();
+      expect(instance.variableStatus("var a", "var a", "value")).toEqual(
+        "selected"
+      );
+    });
+
+    it("detects not filled in variable", async () => {
+      const instance = mount(<VariableColouring {...props} />).instance();
+      expect(instance.variableStatus("var b", "var a", "[var a]")).toEqual(
+        "not filled in"
+      );
+    });
+
+    it("detects filled in variable", async () => {
+      const instance = mount(<VariableColouring {...props} />).instance();
+      expect(instance.variableStatus("var v", "var a", "value")).toEqual(
+        "filled in"
+      );
+    });
+  });
 });
