@@ -1,6 +1,6 @@
 exports.tableNames = [
   "CDS template",
-  "Steves template",
+  "test template",
   "questions",
   "multiple_choice_options"
 ];
