@@ -14,6 +14,14 @@ export class Agreement extends Component {
     return null;
   };
 
+  displayTextForId = (sheet, id) => {
+    let row = sheet.filter(r => r.id === id)[0];
+    if (row) {
+      return row.display_text;
+    }
+    return null;
+  };
+
   evaluateRowConditions = (row, variables, options, userValues) => {
     const { logic_type, variable_1, test, variable_2 } = row;
 
@@ -27,7 +35,7 @@ export class Agreement extends Component {
     let returnValue = false;
     const v1Name = this.nameForId(variables, variable_1[0]);
     const v1Value = userValues[v1Name];
-    const v2Values = variable_2.map(v => this.nameForId(options, v));
+    const v2Values = variable_2.map(v => this.displayTextForId(options, v));
 
     if (logic_type === "if" && test === "in_list") {
       v2Values.forEach(v2 => {

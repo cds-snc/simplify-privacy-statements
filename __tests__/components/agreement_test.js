@@ -47,6 +47,16 @@ describe("Agreement", () => {
     });
   });
 
+  describe("function displayTextForId", () => {
+    it("works", async () => {
+      const instance = mount(<Agreement {...props} />).instance();
+      expect(instance.displayTextForId(optionsFixture, "o-anonymous")).toEqual(
+        "Anonymous"
+      );
+      expect(instance.displayTextForId(optionsFixture, "bad id")).toEqual(null);
+    });
+  });
+
   describe("function evaluateRowConditions", () => {
     let row, userValues;
 
@@ -88,7 +98,7 @@ describe("Agreement", () => {
         variable_2: ["o-anonymous"]
       };
 
-      userValues = { confidentiality: "anonymous" };
+      userValues = { confidentiality: "Anonymous" };
       expect(
         instance.evaluateRowConditions(
           row,
@@ -98,7 +108,7 @@ describe("Agreement", () => {
         )
       ).toEqual(true);
 
-      userValues = { confidentiality: "confidential" };
+      userValues = { confidentiality: "Confidential" };
       expect(
         instance.evaluateRowConditions(
           row,
@@ -108,7 +118,7 @@ describe("Agreement", () => {
         )
       ).toEqual(false);
 
-      userValues = { confidentiality: "anonymous" };
+      userValues = { confidentiality: "Anonymous" };
       row.variable_2 = ["o-anonymous", "o-anonymized"];
       expect(
         instance.evaluateRowConditions(
@@ -129,7 +139,7 @@ describe("Agreement", () => {
         variable_2: ["o-anonymous"]
       };
 
-      userValues = { confidentiality: "anonymous" };
+      userValues = { confidentiality: "Anonymous" };
       expect(
         instance.evaluateRowConditions(
           row,
@@ -139,7 +149,7 @@ describe("Agreement", () => {
         )
       ).toEqual(false);
 
-      userValues = { confidentiality: "confidential" };
+      userValues = { confidentiality: "Confidential" };
       expect(
         instance.evaluateRowConditions(
           row,
@@ -159,7 +169,7 @@ describe("Agreement", () => {
         variable_2: ["o-anonymous", "o-anonymized"]
       };
 
-      userValues = { confidentiality: "anonymous" };
+      userValues = { confidentiality: "Anonymous" };
       expect(
         instance.evaluateRowConditions(
           row,
@@ -169,7 +179,7 @@ describe("Agreement", () => {
         )
       ).toEqual(true);
 
-      userValues = { confidentiality: "anonymized" };
+      userValues = { confidentiality: "Anonymized" };
       expect(
         instance.evaluateRowConditions(
           row,
@@ -179,7 +189,7 @@ describe("Agreement", () => {
         )
       ).toEqual(true);
 
-      userValues = { confidentiality: "confidential" };
+      userValues = { confidentiality: "Confidential" };
       expect(
         instance.evaluateRowConditions(
           row,

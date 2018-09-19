@@ -22,10 +22,10 @@ export class MultipleChoice extends Component {
           className={key === 0 ? style : null}
           disabled={option.disabled == "true" ? "disabled" : null}
           onClick={() => {
-            this.props.saveInputData({ [name]: option.variable_name });
+            this.props.saveInputData({ [name]: option.display_text });
             this.props.saveVariableSelected({ variableSelected: name });
           }}
-          checked={option.variable_name === reduxState[name] ? true : null}
+          checked={option.display_text === reduxState[name] ? true : null}
           onChange={() => {}} // remove jest warning
         >
           {option.display_text}
