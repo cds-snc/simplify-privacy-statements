@@ -4,8 +4,19 @@ import JsxParser from "react-jsx-parser";
 import PropTypes from "prop-types";
 import MarkdownIt from "markdown-it";
 import VariableColouring from "./variable_colouring";
+import LabelText from "@govuk-react/label-text";
+import { SelectInput } from "@govuk-react/select";
+var airtableConstants = require("../utils/airtable_constants");
 
 export class Agreement extends Component {
+  templateList = airtableConstants.tableNames.filter(
+    tn => tn.toLowerCase().indexOf("template") !== -1
+  );
+
+  state = {
+    templateName: this.templateList[0]
+  };
+
   nameForId = (sheet, id) => {
     let row = sheet.filter(r => r.id === id)[0];
     if (row) {
@@ -65,26 +76,35 @@ export class Agreement extends Component {
     return `<VariableColouring variableSelected='${variableSelected}' variable='${p1}' variableValue='${variableValue}'/>`;
   };
 
+  selectOnChange = event => {
+    this.setState({ templateName: event.target.value });
+  };
+
   render() {
     const { reduxState } = this.props;
+    let finalTemplate;
 
-    const finalTemplate = reduxState.template
-      .filter(row =>
-        this.evaluateRowConditions(
-          row,
-          reduxState.questions,
-          reduxState.multiple_choice_options,
-          reduxState
+    if (reduxState[this.state.templateName]) {
+      finalTemplate = reduxState[this.state.templateName]
+        .filter(row =>
+          this.evaluateRowConditions(
+            row,
+            reduxState.questions,
+            reduxState.multiple_choice_options,
+            reduxState
+          )
         )
-      )
-      .map(
-        row =>
-          this.props.showSection && row.section_name !== undefined
-            ? `**[${row.section_name}]**\n ${row.display_text}`
-            : row.display_text
-      )
-      .map(s => s.replace(/^\*\s/, "\n* "))
-      .join("");
+        .map(
+          row =>
+            this.props.showSection && row.section_name !== undefined
+              ? `**[${row.section_name}]**\n ${row.display_text}`
+              : row.display_text
+        )
+        .map(s => s.replace(/^\*\s/, "\n* "))
+        .join("");
+    } else {
+      finalTemplate = "";
+    }
 
     let md = new MarkdownIt({ breaks: true });
 
@@ -93,11 +113,28 @@ export class Agreement extends Component {
       .replace(/<br>/g, "<br/>")
       .replace(/\{(\S+)\}/g, this.colouringFunction);
     return (
-      <JsxParser
-        bindings={reduxState}
-        components={{ VariableColouring }}
-        jsx={jsxString}
-      />
+      <div>
+        <label htmlFor="select template">
+          <LabelText>
+            Template:&nbsp;
+            <SelectInput id="select template" onChange={this.selectOnChange}>
+              {this.templateList.map(tn => {
+                return (
+                  <option key={tn} value={tn}>
+                    {tn}
+                  </option>
+                );
+              })}
+            </SelectInput>
+          </LabelText>
+        </label>
+
+        <JsxParser
+          bindings={reduxState}
+          components={{ VariableColouring }}
+          jsx={jsxString}
+        />
+      </div>
     );
   }
 }

@@ -5,16 +5,20 @@ import { Agreement } from "../../components/agreement";
 import optionsFixture from "../fixtures/options";
 import questionsFixture from "../fixtures/questions";
 import templateFixture from "../fixtures/template";
+var airtableConstants = require("../../utils/airtable_constants");
 const { axe, toHaveNoViolations } = require("jest-axe");
 expect.extend(toHaveNoViolations);
 
 describe("Agreement", () => {
   let props;
+  const templateList = airtableConstants.tableNames.filter(
+    tn => tn.toLowerCase().indexOf("template") !== -1
+  );
 
   beforeEach(() => {
     props = {
       reduxState: {
-        template: templateFixture,
+        [templateList[0]]: templateFixture,
         questions: questionsFixture,
         multiple_choice_options: optionsFixture
       }
