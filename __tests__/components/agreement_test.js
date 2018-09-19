@@ -80,9 +80,9 @@ describe("Agreement", () => {
       ).toEqual(false);
     });
 
-    it("works for case none", async () => {
+    it("works for case always_include", async () => {
       const instance = mount(<Agreement {...props} />).instance();
-      row = { logic_type: "none" };
+      row = { logic_type: "always_include" };
       expect(
         instance.evaluateRowConditions(
           row,

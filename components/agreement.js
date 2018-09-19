@@ -36,7 +36,7 @@ export class Agreement extends Component {
   evaluateRowConditions = (row, variables, options, userValues) => {
     const { logic_type, variable_1, test, variable_2 } = row;
 
-    if (logic_type === "none") {
+    if (logic_type === "none" || logic_type == "always_include") {
       return true;
     }
     if (variable_1 === undefined || variable_2 === undefined) {

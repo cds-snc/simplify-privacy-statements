@@ -1,11 +1,11 @@
 const templateFixture = [
   {
-    logic_type: "none",
+    logic_type: "always_include",
     display_text: "text1",
     section_name: "section_1"
   },
   {
-    logic_type: "none",
+    logic_type: "always_include",
     display_text: "text2 {researcher_name} {researcher_email} {researcher_name}"
   },
   {
