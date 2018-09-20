@@ -6,7 +6,6 @@ import Questionaire from "../components/questionaire";
 import Agreement from "../components/agreement";
 import Header from "../components/header";
 import Button from "@govuk-react/button";
-import CdsLogo from "../components/logo";
 import TemplateDropdown from "../components/template_dropdown";
 import Link from "next/link";
 
@@ -40,10 +39,6 @@ const Right = css`
 const dropdownStyle = css`
   margin-bottom: 10px;
 `;
-const agreementStyle = css`
-  border-top: 2px solid black;
-  padding-top: 10px;
-`;
 
 export class Index extends Component {
   render() {
@@ -66,10 +61,7 @@ export class Index extends Component {
                 <Button>Download Word Doc</Button>
               </Link>
 
-              <div id="agreement" className={agreementStyle}>
-                <CdsLogo />
-                <Agreement store={this.props.store} />
-              </div>
+              <Agreement store={this.props.store} />
             </div>
           </div>
         </Layout>
