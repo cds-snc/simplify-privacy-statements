@@ -51,7 +51,10 @@ class MyDocument extends Document {
     return (
       <html lang="en" style={htmlStyling}>
         <Head>
+          <meta charSet="UTF-8" />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
+          <link rel="icon" href="/static/favicon.ico" />
+          <title>Privacy and Consent Form Generator</title>
         </Head>
         <body style={bodyStyling}>
           <Main />
