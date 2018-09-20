@@ -76,7 +76,9 @@ export class Index extends Component {
                 store={this.props.store}
               />
               <Button onClick={this.getBlobUrl}>Download Word Doc</Button>
-              <a id="hidden_download_anchor" style={{ display: "none" }} />
+              <a id="hidden_download_anchor" style={{ display: "none" }}>
+                Download Word Doc
+              </a>
               <div id="agreement" className={agreementStyle}>
                 <CdsLogo />
                 <Agreement store={this.props.store} />
