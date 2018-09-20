@@ -40,7 +40,7 @@ export const reducer = (state = initialState, action) => {
 
       // set default values for questions
       action.data.questions.map(question => {
-        newState[question.variable_name] = `[${question.variable_name}]`;
+        newState[question.variable_name] = `${question.variable_name}`;
       });
 
       return Object.assign({}, state, newState);

@@ -6,7 +6,7 @@ export class VariableColouring extends Component {
   variableStatus = (variableSelected, variable, variableValue) => {
     if (variable === variableSelected) {
       return "selected";
-    } else if (variableValue === `[${variable}]`) {
+    } else if (variableValue === `${variable}`) {
       return "not filled in";
     } else {
       return "filled in";

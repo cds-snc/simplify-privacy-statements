@@ -32,7 +32,7 @@ describe("VariableColouring", () => {
 
     it("detects not filled in variable", async () => {
       const instance = mount(<VariableColouring {...props} />).instance();
-      expect(instance.variableStatus("var b", "var a", "[var a]")).toEqual(
+      expect(instance.variableStatus("var b", "var a", "var a")).toEqual(
         "not filled in"
       );
     });
