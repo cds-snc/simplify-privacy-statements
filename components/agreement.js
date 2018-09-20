@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import MarkdownIt from "markdown-it";
 import VariableColouring from "./variable_colouring";
 import MissingVariables from "./missing_variables";
+import BadTemplateRows from "./bad_template_rows";
 import evaluateRowConditions from "../utils/evaluate_row";
 
 var airtableConstants = require("../utils/airtable_constants");
@@ -63,7 +64,10 @@ export class Agreement extends Component {
     return (
       <div>
         {this.props.editingMode ? (
-          <MissingVariables store={this.props.store} />
+          <React.Fragment>
+            <MissingVariables store={this.props.store} />
+            <BadTemplateRows store={this.props.store} />
+          </React.Fragment>
         ) : null}
         <JsxParser
           bindings={reduxState}

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { css } from "react-emotion";
 
 const root = css`
+  margin: 10px;
   border-style: solid;
   border-color: red;
   border-radius: 5px;
