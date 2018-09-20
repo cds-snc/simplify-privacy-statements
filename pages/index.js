@@ -40,6 +40,10 @@ const Right = css`
 const dropdownStyle = css`
   margin-bottom: 10px;
 `;
+const agreementStyle = css`
+  border-top: 2px solid black;
+  padding-top: 10px;
+`;
 
 export class Index extends Component {
   getBlobUrl = () => {
@@ -73,7 +77,7 @@ export class Index extends Component {
               />
               <Button onClick={this.getBlobUrl}>Download Word Doc</Button>
               <a id="hidden_download_anchor" style={{ display: "none" }} />
-              <div id="agreement">
+              <div id="agreement" className={agreementStyle}>
                 <CdsLogo />
                 <Agreement store={this.props.store} />
               </div>
