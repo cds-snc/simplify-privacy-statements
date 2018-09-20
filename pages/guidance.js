@@ -7,20 +7,29 @@ import Header from "../components/header";
 import Button from "@govuk-react/button";
 import htmlDocx from "html-docx-js/dist/html-docx";
 import Link from "next/link";
+import CdsLogo from "../components/logo";
 
 const body = css`
   padding: 2rem;
 `;
+const hidden = css`
+  display: none;
+`;
+const button = css`
+  display: inline;
+  margin: 20px;
+  margin-left: 0;
+`;
 
 export class Guidance extends Component {
-  getBlobUrl = () => {
+  getBlobUrl = (elementId, anchorId) => {
     if (window) {
-      var content = document.getElementById("agreement").innerHTML;
+      var content = document.getElementById(elementId).innerHTML;
       var myBlob = htmlDocx.asBlob(content);
       var blobURL = window.URL.createObjectURL(myBlob);
-      var a = document.getElementById("hidden_download_anchor");
+      var a = document.getElementById(anchorId);
       a.href = blobURL;
-      a.download = "agreement_" + Date.now().toString() + ".docx";
+      a.download = elementId + "_" + Date.now().toString() + ".docx";
       a.click();
     }
     return null;
@@ -38,13 +47,39 @@ export class Guidance extends Component {
 
             <h2>Guidance - Please Read!</h2>
 
-            <div id="agreement">
+            <div id="guidance">
               <Agreement showGuidance store={this.props.store} />
             </div>
-            <Button onClick={this.getBlobUrl}>Download Word Doc</Button>
-            <a id="hidden_download_anchor" style={{ display: "none" }}>
-              Download Word Doc
-            </a>
+
+            <div>
+              <Button
+                className={button}
+                onClick={() =>
+                  this.getBlobUrl("guidance", "guidance_download_anchor")
+                }
+              >
+                Download Guidance
+              </Button>
+              <a id="guidance_download_anchor" style={{ display: "none" }}>
+                Download Guidance
+              </a>
+
+              <Button
+                className={button}
+                onClick={() =>
+                  this.getBlobUrl("agreement", "agreement_download_anchor")
+                }
+              >
+                Download Agreement
+              </Button>
+              <a id="agreement_download_anchor" style={{ display: "none" }}>
+                Download Agreement
+              </a>
+            </div>
+          </div>
+          <div id="agreement" className={hidden}>
+            <CdsLogo />
+            <Agreement store={this.props.store} />
           </div>
         </Layout>
       </React.Fragment>
