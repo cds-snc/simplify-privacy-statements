@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Radio from "@govuk-react/radio";
+import Radio from "./radio";
 import MultiChoice from "@govuk-react/multi-choice";
 import PropTypes from "prop-types";
 import { css } from "react-emotion";
@@ -19,7 +19,8 @@ export class MultipleChoice extends Component {
           name={name}
           id={option.variable_name + key}
           key={key}
-          className={key === 0 ? style : null}
+          className={style}
+          helperText={option.helper_text}
           disabled={option.disabled == "true" ? "disabled" : null}
           onClick={() => {
             this.props.saveInputData({ [name]: option.display_text });
