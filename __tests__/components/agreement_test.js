@@ -41,7 +41,13 @@ describe("Agreement", () => {
   it("shows the section name appropriately", async () => {
     expect(mount(<Agreement {...props} />).text()).not.toContain("section_1");
     expect(mount(<Agreement editingMode {...props} />).text()).toContain(
-      "section_1"
+      "section1"
+    );
+  });
+  it("shows the guidance appropriately", async () => {
+    expect(mount(<Agreement {...props} />).text()).not.toContain("section_1");
+    expect(mount(<Agreement showGuidance {...props} />).text()).toContain(
+      "guidance1"
     );
   });
 });

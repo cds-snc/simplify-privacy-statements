@@ -24,7 +24,11 @@ export class TemplateDropdown extends Component {
         <SelectInput id="select template" onChange={this.selectOnChange}>
           {templateList.map(tn => {
             return (
-              <option key={tn} value={tn}>
+              <option
+                key={tn}
+                value={tn}
+                selected={tn === this.props.reduxState.templateSelected}
+              >
                 {tn}
               </option>
             );

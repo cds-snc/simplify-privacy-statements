@@ -6,9 +6,9 @@ import Questionaire from "../components/questionaire";
 import Agreement from "../components/agreement";
 import Header from "../components/header";
 import Button from "@govuk-react/button";
-import htmlDocx from "html-docx-js/dist/html-docx";
 import CdsLogo from "../components/logo";
 import TemplateDropdown from "../components/template_dropdown";
+import Link from "next/link";
 
 const Container = css`
   box-sizing: border-box;
@@ -46,19 +46,6 @@ const agreementStyle = css`
 `;
 
 export class Index extends Component {
-  getBlobUrl = () => {
-    if (window) {
-      var content = document.getElementById("agreement").innerHTML;
-      var myBlob = htmlDocx.asBlob(content);
-      var blobURL = window.URL.createObjectURL(myBlob);
-      var a = document.getElementById("hidden_download_anchor");
-      a.href = blobURL;
-      a.download = "agreement_" + Date.now().toString() + ".docx";
-      a.click();
-    }
-    return null;
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -75,10 +62,10 @@ export class Index extends Component {
                 className={dropdownStyle}
                 store={this.props.store}
               />
-              <Button onClick={this.getBlobUrl}>Download Word Doc</Button>
-              <a id="hidden_download_anchor" style={{ display: "none" }}>
-                Download Word Doc
-              </a>
+              <Link href="/guidance">
+                <Button>Download Word Doc</Button>
+              </Link>
+
               <div id="agreement" className={agreementStyle}>
                 <CdsLogo />
                 <Agreement store={this.props.store} />

@@ -33,7 +33,19 @@ export class Agreement extends Component {
     const { reduxState } = this.props;
     let finalTemplate;
 
-    if (reduxState[reduxState.templateSelected]) {
+    let template = reduxState[reduxState.templateSelected];
+    if (!template) {
+      return null;
+    }
+
+    template.forEach(row => {
+      row.textToDisplay = this.props.showGuidance
+        ? row.Guidance
+        : row.display_text;
+      row.textToDisplay = row.textToDisplay ? row.textToDisplay : "";
+    });
+
+    if (template) {
       finalTemplate = reduxState[reduxState.templateSelected]
         .filter(row =>
           evaluateRowConditions(
@@ -46,8 +58,8 @@ export class Agreement extends Component {
         .map(
           row =>
             this.props.editingMode && row.section_name !== undefined
-              ? `**[${row.section_name}]**\n ${row.display_text}`
-              : row.display_text
+              ? `**[${row.section_name}]**\n ${row.textToDisplay}`
+              : row.textToDisplay
         )
         .map(s => s.replace(/^\*\s/, "\n* "))
         .join("");
@@ -88,6 +100,7 @@ const mapStateToProps = reduxState => {
 Agreement.propTypes = {
   reduxState: PropTypes.object,
   editingMode: PropTypes.bool,
+  showGuidance: PropTypes.bool,
   store: PropTypes.object
 };
 

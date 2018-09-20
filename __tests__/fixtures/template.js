@@ -2,7 +2,8 @@ const templateFixture = [
   {
     logic_type: "always_include",
     display_text: "text1",
-    section_name: "section_1"
+    section_name: "section1",
+    Guidance: "guidance1"
   },
   {
     logic_type: "always_include",
