@@ -57,11 +57,10 @@ export class Index extends Component {
                 className={dropdownStyle}
                 store={this.props.store}
               />
+              <Agreement store={this.props.store} />
               <Link href="/guidance">
                 <Button>Download Word Doc</Button>
               </Link>
-
-              <Agreement store={this.props.store} />
             </div>
           </div>
         </Layout>

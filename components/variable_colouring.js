@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { css } from "react-emotion";
 import PropTypes from "prop-types";
+import { globalTheme } from "../theme";
 
 export class VariableColouring extends Component {
   variableStatus = (variableSelected, variable, variableValue) => {
@@ -20,17 +21,17 @@ export class VariableColouring extends Component {
     switch (this.variableStatus(variableSelected, variable, variableValue)) {
       case "selected":
         style = css`
-          background-color: yellow;
+          background-color: ${globalTheme.colour.cdsYellow};
         `;
         break;
       case "not filled in":
         style = css`
-          color: red;
+          color: ${globalTheme.colour.tornadoRed};
         `;
         break;
       case "filled in":
         style = css`
-          color: green;
+          color: ${globalTheme.colour.fernGreen};
         `;
     }
     return <span className={style}>{this.props.variableValue}</span>;
