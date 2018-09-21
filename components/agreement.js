@@ -57,7 +57,8 @@ export class Agreement extends Component {
         )
         .map(
           row =>
-            this.props.editingMode && row.section_name !== undefined
+            this.props.reduxState.editingMode === "policy" &&
+            row.section_name !== undefined
               ? `**[${row.section_name}]**\n ${row.textToDisplay}`
               : row.textToDisplay
         )
@@ -76,7 +77,7 @@ export class Agreement extends Component {
 
     return (
       <div>
-        {this.props.editingMode ? (
+        {this.props.reduxState.editingMode === "policy" ? (
           <React.Fragment>
             <MissingVariables store={this.props.store} />
             <BadTemplateRows store={this.props.store} />
@@ -96,7 +97,6 @@ const mapStateToProps = reduxState => {
 
 Agreement.propTypes = {
   reduxState: PropTypes.object,
-  editingMode: PropTypes.bool,
   showGuidance: PropTypes.bool,
   store: PropTypes.object
 };

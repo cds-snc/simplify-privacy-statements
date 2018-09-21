@@ -23,7 +23,8 @@ describe("Agreement", () => {
       [templateList[0]]: templateFixture,
       questions: questionsFixture,
       multiple_choice_options: optionsFixture,
-      templateSelected: templateList[0]
+      templateSelected: templateList[0],
+      editingMode: "Generate Templates"
     };
     props.reduxState = reduxState;
     props.store = mockStore(reduxState);
@@ -39,10 +40,9 @@ describe("Agreement", () => {
   });
 
   it("shows the section name appropriately", async () => {
+    props.reduxState.editingMode = "policy";
     expect(mount(<Agreement {...props} />).text()).not.toContain("section_1");
-    expect(mount(<Agreement editingMode {...props} />).text()).toContain(
-      "section1"
-    );
+    expect(mount(<Agreement {...props} />).text()).toContain("section1");
   });
   it("shows the guidance appropriately", async () => {
     expect(mount(<Agreement {...props} />).text()).not.toContain("section_1");

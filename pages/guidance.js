@@ -46,7 +46,10 @@ class Guidance extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header text="Your files are downloading now." />
+        <Header
+          text="Your files are downloading now."
+          store={this.props.store}
+        />
         <Layout>
           <div className={body}>
             <p className={introText}>

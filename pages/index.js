@@ -44,7 +44,7 @@ export class Index extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <Header store={this.props.store} />
         <Layout>
           <div className={Container}>
             <div className={cx(LeftRight, Left)}>

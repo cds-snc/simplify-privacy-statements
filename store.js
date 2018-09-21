@@ -2,6 +2,7 @@ import { createStore } from "redux";
 
 const initialState = {
   variableSelected: "none",
+  editingMode: "researcher",
   templateList: [],
   errors: ""
 };
@@ -54,6 +55,10 @@ export const reducer = (state = initialState, action) => {
     case "SAVE_TEMPLATE_SELECTED":
       return Object.assign({}, state, {
         templateSelected: action.data.templateSelected
+      });
+    case "SAVE_EDITING_MODE":
+      return Object.assign({}, state, {
+        editingMode: action.data.editingMode
       });
     default:
       return state;
