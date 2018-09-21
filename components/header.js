@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { css } from "react-emotion";
+import { globalTheme } from "../theme";
 
 // Top taken from https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
 
@@ -16,7 +17,7 @@ const Top = css`
 
 const H1 = css`
   font-size: 2em;
-  color: #fc3;
+  color: ${globalTheme.colour.cdsYellow};
   margin: 0px;
 `;
 

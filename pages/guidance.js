@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Layout from "../components/layout";
 import Agreement from "../components/agreement";
 import Header from "../components/header";
-import Button from "@govuk-react/button";
+import Button from "../components/button";
 import htmlDocx from "html-docx-js/dist/html-docx";
 import Link from "next/link";
 import CdsLogo from "../components/logo";

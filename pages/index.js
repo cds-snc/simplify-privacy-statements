@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 import Questionaire from "../components/questionaire";
 import Agreement from "../components/agreement";
 import Header from "../components/header";
-import Button from "@govuk-react/button";
+import Button from "../components/button";
 import TemplateDropdown from "../components/template_dropdown";
 import Link from "next/link";
 

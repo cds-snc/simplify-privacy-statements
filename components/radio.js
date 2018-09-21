@@ -4,6 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "react-emotion";
+import { globalTheme } from "../theme";
 
 const Label = styled("label")(
   {
@@ -34,7 +35,7 @@ const Input = styled("input")(
       opacity: 1
     },
     ":focus + span::before": {
-      boxShadow: `0 0 0 4px #fc3`
+      boxShadow: `0 0 0 4px ${globalTheme.colour.cdsYellow}`
     }
   },
   ({ disabled }) => ({
@@ -83,7 +84,7 @@ const helper = css`
   margin-left: 12px;
   padding-left: 12px;
   margin-bottom: 20px;
-  border-left: 4px solid #fc3;
+  border-left: 4px solid ${globalTheme.colour.cdsYellow};
 `;
 
 const Radio = ({ inline, children, className, helperText, ...input }) => (
