@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import configureStore from "redux-mock-store";
-import { Guidance } from "../../pages/guidance";
+import Guidance from "../../pages/guidance";
 import questionsFixture from "../fixtures/questions";
 import optionsFixture from "../fixtures/options";
 import templateFixture from "../fixtures/template";
@@ -12,7 +12,9 @@ describe("Guidance", () => {
   let props, mockStore, reduxState;
 
   beforeEach(() => {
-    props = {};
+    props = {
+      test: true
+    };
     mockStore = configureStore();
     reduxState = {
       questions: questionsFixture,

@@ -20,10 +20,14 @@ const button = css`
   margin: 20px;
   margin-left: 0;
 `;
+const introText = css`
+  font-weight: bold;
+  margin-bottom: 40px;
+`;
 
-export class Guidance extends Component {
+class Guidance extends Component {
   getBlobUrl = (elementId, anchorId) => {
-    if (window) {
+    if (window && !this.props.test) {
       var content = document.getElementById(elementId).innerHTML;
       var myBlob = htmlDocx.asBlob(content);
       var blobURL = window.URL.createObjectURL(myBlob);
@@ -35,17 +39,24 @@ export class Guidance extends Component {
     return null;
   };
 
+  componentDidMount() {
+    this.getBlobUrl("agreement", "agreement_download_anchor");
+  }
+
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <Header text="Your files are downloading now." />
         <Layout>
           <div className={body}>
-            <Link href="/">
-              <Button>Back</Button>
-            </Link>
+            <p className={introText}>
+              Please read through the following crideria on how to conduct the
+              research based on the requirements you provided in the previous
+              step. If you cannot comply with the criteria, you may go back and
+              change the requirements to fit you needs.
+            </p>
 
-            <h2>Guidance - Please Read!</h2>
+            <h2>Guidance</h2>
 
             <div id="guidance">
               <Agreement showGuidance store={this.props.store} />
@@ -63,18 +74,12 @@ export class Guidance extends Component {
               <a id="guidance_download_anchor" style={{ display: "none" }}>
                 Download Guidance
               </a>
-
-              <Button
-                className={button}
-                onClick={() =>
-                  this.getBlobUrl("agreement", "agreement_download_anchor")
-                }
-              >
-                Download Agreement
-              </Button>
               <a id="agreement_download_anchor" style={{ display: "none" }}>
                 Download Agreement
               </a>
+              <Link href="/">
+                <Button secondary={true}>Back</Button>
+              </Link>
             </div>
           </div>
           <div id="agreement" className={hidden}>
@@ -87,8 +92,13 @@ export class Guidance extends Component {
   }
 }
 
+Guidance.defaultProps = {
+  test: false
+};
+
 Guidance.propTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
+  test: PropTypes.bool
 };
 
 export default Guidance;
