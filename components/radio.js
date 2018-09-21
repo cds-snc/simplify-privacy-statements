@@ -34,7 +34,7 @@ const Input = styled("input")(
       opacity: 1
     },
     ":focus + span::before": {
-      boxShadow: `0 0 0 4px #FFBF47`
+      boxShadow: `0 0 0 4px #fc3`
     }
   },
   ({ disabled }) => ({
@@ -82,7 +82,8 @@ const LabelText = styled("span")({
 const helper = css`
   margin-left: 12px;
   padding-left: 12px;
-  border-left: 4px solid #ffbf47;
+  margin-bottom: 20px;
+  border-left: 4px solid #fc3;
 `;
 
 const Radio = ({ inline, children, className, helperText, ...input }) => (

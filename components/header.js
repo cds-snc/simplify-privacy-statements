@@ -16,7 +16,7 @@ const Top = css`
 
 const H1 = css`
   font-size: 2em;
-  color: #f8e71c;
+  color: #fc3;
   margin: 0px;
 `;
 
