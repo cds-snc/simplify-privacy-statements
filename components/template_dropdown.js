@@ -4,17 +4,22 @@ import PropTypes from "prop-types";
 import { SelectInput } from "@govuk-react/select";
 import LabelText from "@govuk-react/label-text";
 
-var airtableConstants = require("../utils/airtable_constants");
-var templateList = airtableConstants.tableNames.filter(
-  tn => tn.toLowerCase().indexOf("template") !== -1
-);
-
 export class TemplateDropdown extends Component {
+  componentDidMount() {
+    if (!this.props.reduxState.templateSelected) {
+      this.props.saveTemplateSelected({
+        templateSelected: this.props.reduxState.templateList[0]
+      });
+    }
+  }
+
   selectOnChange = event => {
     this.props.saveTemplateSelected({ templateSelected: event.target.value });
   };
 
   render() {
+    const templateList = this.props.reduxState.templateList;
+
     return (
       <div className={this.props.className}>
         <label htmlFor="select template">

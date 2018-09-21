@@ -23,9 +23,14 @@ var fetchTableFromAirtable = async function fetchTableFromAirtable(table) {
     offset = json.offset;
   } while (offset);
 
-  return jsonRecords.map(function(item) {
-    return item.fields;
-  });
+  try {
+    return jsonRecords.map(function(item) {
+      return item.fields;
+    });
+  } catch (e) {
+    console.log(`Error in downloading table ${table}:`, e);
+    exit(1);
+  }
 };
 
 var hydrateFromAirtable = (exports.hydrateFromAirtable = async function hydrateFromAirtable() {
@@ -38,6 +43,16 @@ var hydrateFromAirtable = (exports.hydrateFromAirtable = async function hydrateF
     dataStore[tableName] = await fetchTableFromAirtable(tableName);
   });
   await Promise.all(promises);
+
+  dataStore["templateList"] = dataStore["Template List"]
+    .map(row => row.Name)
+    .filter(s => s !== undefined);
+
+  promises = dataStore.templateList.map(async function(templateName) {
+    dataStore[templateName] = await fetchTableFromAirtable(templateName);
+  });
+  await Promise.all(promises);
+
   dataStore["errors"] = [];
 
   dataStore.timestamp = await Date.now();

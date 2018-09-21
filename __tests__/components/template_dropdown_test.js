@@ -9,8 +9,8 @@ describe("TemplateDropdown", () => {
 
   beforeEach(() => {
     props = {
-      reduxState: {},
-      saveSelectedTemplate: jest.fn()
+      reduxState: { templateList: ["template1", "template2"] },
+      saveTemplateSelected: jest.fn()
     };
   });
 

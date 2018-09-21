@@ -1,22 +1,13 @@
 import { createStore } from "redux";
-import airtableConstants from "./utils/airtable_constants";
 
 const initialState = {
   variableSelected: "none",
+  templateList: [],
   errors: ""
 };
 
-airtableConstants.tableNames.forEach(tableName => {
-  initialState[tableName] = [];
-});
-const templateList = airtableConstants.tableNames.filter(
-  tn => tn.toLowerCase().indexOf("template") !== -1
-);
-initialState["templateSelected"] = templateList[0];
-
 // REDUCERS
 export const reducer = (state = initialState, action) => {
-  let benefits;
   let newState;
 
   switch (action.type) {
@@ -27,16 +18,13 @@ export const reducer = (state = initialState, action) => {
             ? action.data.timestamp
             : state.timestamp
       };
-      airtableConstants.tableNames.forEach(tableName => {
+
+      Object.keys(action.data).forEach(tableName => {
         newState[tableName] =
           action.data[tableName] !== undefined
             ? action.data[tableName]
             : state[tableName];
       });
-      newState["errors"] =
-        action.data["errors"] !== undefined
-          ? action.data["errors"]
-          : state["errors"];
 
       // set default values for questions
       action.data.questions.map(question => {

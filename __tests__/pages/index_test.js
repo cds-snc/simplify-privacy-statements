@@ -15,6 +15,7 @@ describe("Index", () => {
     props = {};
     mockStore = configureStore();
     reduxState = {
+      templateList: ["template", "template2"],
       questions: questionsFixture,
       multiple_choice_options: optionsFixture,
       template: templateFixture

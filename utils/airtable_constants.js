@@ -1,6 +1,1 @@
-exports.tableNames = [
-  "CDS template",
-  "test template",
-  "questions",
-  "multiple_choice_options"
-];
+exports.tableNames = ["Template List", "questions", "multiple_choice_options"];
