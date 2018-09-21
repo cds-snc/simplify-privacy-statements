@@ -22,7 +22,7 @@ export class Agreement extends Component {
   colouringFunction = (match, p1) => {
     const variableSelected = this.props.reduxState.variableSelected;
     const variableValue = this.props.reduxState[p1];
-    return `<VariableColouring variableSelected='${variableSelected}' variable='${p1}' variableValue='${variableValue}'/>`;
+    return `<VariableColouring variableSelected="${variableSelected}" variable="${p1}" variableValue="${variableValue}"/>`;
   };
 
   selectOnChange = event => {
@@ -73,6 +73,7 @@ export class Agreement extends Component {
       .render(finalTemplate)
       .replace(/<br>/g, "<br/>")
       .replace(/\{(\S+)\}/g, this.colouringFunction);
+
     return (
       <div>
         {this.props.editingMode ? (
@@ -81,11 +82,7 @@ export class Agreement extends Component {
             <BadTemplateRows store={this.props.store} />
           </React.Fragment>
         ) : null}
-        <JsxParser
-          bindings={reduxState}
-          components={{ VariableColouring }}
-          jsx={jsxString}
-        />
+        <JsxParser components={{ VariableColouring }} jsx={jsxString} />
       </div>
     );
   }
