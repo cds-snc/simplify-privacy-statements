@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { css } from "react-emotion";
+import { globalTheme } from "../theme";
 
 const root = css`
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border-style: solid;
-  border-color: red;
+  border-color: ${globalTheme.colour.tornadoRed};
   border-radius: 5px;
   padding-left: 20px;
   padding-right: 20px;
