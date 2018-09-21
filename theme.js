@@ -11,8 +11,9 @@ const theme = {
     darkGreen: "#295f38",
     tornadoRed: "#ea4335",
     govukYellow: "#FFBF47",
-    white: "#ffffff",
-    cdsYellow: "#fc3"
+    white: "#fff",
+    cdsYellow: "#fc3",
+    cdsDarkYellow: "#EAB617"
   }
 };
 

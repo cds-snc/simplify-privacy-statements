@@ -5,10 +5,10 @@ import { globalTheme } from "../theme";
 
 const StyledButton = styled("button")(
   {
-    backgroundColor: globalTheme.colour.fernGreen,
-    border: "none",
+    backgroundColor: globalTheme.colour.cdsYellow,
+    border: "2px solid" + globalTheme.colour.cdsYellow,
     borderRadius: "3px",
-    color: "white",
+    color: "black",
     cursor: "pointer",
     alignItems: "center",
     justifyContent: "space-between",
@@ -23,20 +23,20 @@ const StyledButton = styled("button")(
     WebkitFontSmoothing: "antialiased",
     verticalAlign: "middle",
     ":hover": {
-      backgroundColor: globalTheme.colour.darkGreen,
-      color: "white"
+      backgroundColor: globalTheme.colour.cdsDarkYellow,
+      border: "2px solid" + globalTheme.colour.cdsDarkYellow,
+      color: "black"
     },
     ":focus": {
-      color: "white",
-      backgroundColor: globalTheme.colour.darkGreen
+      color: "black",
+      backgroundColor: globalTheme.colour.cdsDarkYellow
     },
     ":active": {
       position: "relative",
-      top: "2px",
-      boxShadow: `0 0 0 ${globalTheme.colour.darkGreen}`
+      boxShadow: `0 0 0 ${globalTheme.colour.cdsDarkYellow}`
     },
     ":visited": {
-      color: "white"
+      color: "black"
     },
     " svg": {
       verticalAlign: "middle"
@@ -52,15 +52,18 @@ const StyledButton = styled("button")(
     }
   }),
   ({ isSecondary }) => ({
-    backgroundColor: isSecondary ? globalTheme.colour.cerulean : undefined,
+    backgroundColor: isSecondary ? globalTheme.colour.white : undefined,
+    border: isSecondary
+      ? "2px solid" + globalTheme.colour.cdsYellow
+      : undefined,
     ":hover": {
-      backgroundColor: isSecondary ? globalTheme.colour.darkGreyBlue : undefined
+      backgroundColor: isSecondary ? globalTheme.colour.white : undefined,
+      border: isSecondary
+        ? "2px solid" + globalTheme.colour.cdsDarkYellow
+        : undefined
     },
     ":focus": {
-      backgroundColor: isSecondary
-        ? globalTheme.colour.darkGreyBlue
-        : undefined,
-      outline: `3px solid ` + globalTheme.colour.govukYellow
+      backgroundColor: isSecondary ? globalTheme.colour.white : undefined
     },
     ":active": {
       boxShadow: isSecondary
