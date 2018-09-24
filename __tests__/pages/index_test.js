@@ -18,10 +18,14 @@ describe("Index", () => {
       templateList: ["template", "template2"],
       questions: questionsFixture,
       multiple_choice_options: optionsFixture,
-      template: templateFixture
+      template: templateFixture,
+      templateSelected: "template"
     };
-    props.reduxState = reduxState;
-    props.store = mockStore(reduxState);
+    props = {
+      reduxState: reduxState,
+      store: mockStore(reduxState),
+      saveTemplateSelected: jest.fn()
+    };
   });
 
   it("renders", async () => {

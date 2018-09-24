@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { css, cx } from "react-emotion";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Layout from "../components/layout";
 import Questionaire from "../components/questionaire";
 import Agreement from "../components/agreement";
 import Header from "../components/header";
 import Button from "../components/button";
-import TemplateDropdown from "../components/template_dropdown";
+import Dropdown from "../components/dropdown";
 import Link from "next/link";
 
 const Container = css`
@@ -53,9 +54,12 @@ export class Index extends Component {
             </div>
 
             <div className={cx(LeftRight, Right)}>
-              <TemplateDropdown
+              <Dropdown
+                label="Template"
+                options={this.props.reduxState.templateList}
+                selected={this.props.reduxState.templateSelected}
+                saveSelected={this.props.saveTemplateSelected}
                 className={dropdownStyle}
-                store={this.props.store}
               />
               <Agreement store={this.props.store} />
               <Link href="/guidance">
@@ -69,8 +73,30 @@ export class Index extends Component {
   }
 }
 
+const mapStateToProps = reduxState => {
+  return {
+    reduxState: reduxState
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    saveTemplateSelected: x => {
+      dispatch({
+        type: "SAVE_TEMPLATE_SELECTED",
+        data: { templateSelected: x }
+      });
+    }
+  };
+};
+
 Index.propTypes = {
+  reduxState: PropTypes.object,
+  saveTemplateSelected: PropTypes.func,
   store: PropTypes.object
 };
 
-export default Index;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Index);
