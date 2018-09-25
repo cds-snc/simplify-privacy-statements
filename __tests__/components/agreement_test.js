@@ -24,7 +24,8 @@ describe("Agreement", () => {
       questions: questionsFixture,
       multiple_choice_options: optionsFixture,
       templateSelected: templateList[0],
-      editingMode: "Generate Templates"
+      editingMode: "Generate Templates",
+      allQuestions: questionsFixture.map(q => q.variable_name)
     };
     props.reduxState = reduxState;
     props.store = mockStore(reduxState);

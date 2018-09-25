@@ -49,6 +49,13 @@ export class Index extends Component {
         <Layout>
           <div className={Container}>
             <div className={cx(LeftRight, Left)}>
+              <Dropdown
+                label="Questions"
+                options={this.props.reduxState.questionsList}
+                selected={this.props.reduxState.questionSelected}
+                saveSelected={this.props.saveQuestionsSelected}
+                className={dropdownStyle}
+              />
               <h2>Questionaire</h2>
               <Questionaire store={this.props.store} />
             </div>
@@ -86,6 +93,12 @@ const mapDispatchToProps = dispatch => {
         type: "SAVE_TEMPLATE_SELECTED",
         data: { templateSelected: x }
       });
+    },
+    saveQuestionsSelected: x => {
+      dispatch({
+        type: "SAVE_QUESTIONS_SELECTED",
+        data: { questionsSelected: x }
+      });
     }
   };
 };
@@ -93,6 +106,7 @@ const mapDispatchToProps = dispatch => {
 Index.propTypes = {
   reduxState: PropTypes.object,
   saveTemplateSelected: PropTypes.func,
+  saveQuestionsSelected: PropTypes.func,
   store: PropTypes.object
 };
 

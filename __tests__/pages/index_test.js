@@ -19,12 +19,16 @@ describe("Index", () => {
       questions: questionsFixture,
       multiple_choice_options: optionsFixture,
       template: templateFixture,
-      templateSelected: "template"
+      templateSelected: "template",
+      questionSelected: "questions",
+      questionsList: ["questions", "questions2"],
+      allQuestions: questionsFixture.map(q => q.variable_name)
     };
     props = {
       reduxState: reduxState,
       store: mockStore(reduxState),
-      saveTemplateSelected: jest.fn()
+      saveTemplateSelected: jest.fn(),
+      saveQuestionsSelected: jest.fn()
     };
   });
 

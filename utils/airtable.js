@@ -47,9 +47,16 @@ var hydrateFromAirtable = (exports.hydrateFromAirtable = async function hydrateF
   dataStore["templateList"] = dataStore["Template List"]
     .map(row => row.Name)
     .filter(s => s !== undefined);
-
   promises = dataStore.templateList.map(async function(templateName) {
     dataStore[templateName] = await fetchTableFromAirtable(templateName);
+  });
+  await Promise.all(promises);
+
+  dataStore["questionsList"] = dataStore["Questions List"]
+    .map(row => row.Name)
+    .filter(s => s !== undefined);
+  promises = dataStore.questionsList.map(async function(name) {
+    dataStore[name] = await fetchTableFromAirtable(name);
   });
   await Promise.all(promises);
 

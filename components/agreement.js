@@ -7,7 +7,6 @@ import VariableColouring from "./variable_colouring";
 import MissingVariables from "./missing_variables";
 import BadTemplateRows from "./bad_template_rows";
 import evaluateRowConditions from "../utils/evaluate_row";
-
 var airtableConstants = require("../utils/airtable_constants");
 
 export class Agreement extends Component {
@@ -15,18 +14,10 @@ export class Agreement extends Component {
     tn => tn.toLowerCase().indexOf("template") !== -1
   );
 
-  state = {
-    templateName: this.templateList[0]
-  };
-
   colouringFunction = (match, p1) => {
     const variableSelected = this.props.reduxState.variableSelected;
     const variableValue = this.props.reduxState[p1];
     return `<VariableColouring variableSelected="${variableSelected}" variable="${p1}" variableValue="${variableValue}"/>`;
-  };
-
-  selectOnChange = event => {
-    this.setState({ templateName: event.target.value });
   };
 
   render() {
@@ -50,7 +41,7 @@ export class Agreement extends Component {
         .filter(row =>
           evaluateRowConditions(
             row,
-            reduxState.questions,
+            reduxState.allQuestions,
             reduxState.multiple_choice_options,
             reduxState
           )

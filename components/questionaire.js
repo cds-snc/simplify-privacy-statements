@@ -27,8 +27,11 @@ export class Questionaire extends Component {
   };
 
   render() {
-    const { questions } = this.props.reduxState;
     const { reduxState } = this.props;
+    const questions = reduxState[reduxState.questionsSelected];
+    if (!questions) {
+      return null;
+    }
 
     const jsx_array = [];
 
@@ -43,7 +46,7 @@ export class Questionaire extends Component {
         .filter(g =>
           evaluateRowConditions(
             g,
-            reduxState.questions,
+            reduxState.allQuestions,
             reduxState.multiple_choice_options,
             reduxState
           )

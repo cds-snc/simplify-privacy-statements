@@ -56,7 +56,6 @@ export class Header extends Component {
       <div className={Top}>
         <div className={Container}>
           <h1 className={H1}>{this.props.text}</h1>
-
           <span className={buttonBar}>
             {editingTemplates ? (
               <Link href="/refresh">

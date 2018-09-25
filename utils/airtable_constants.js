@@ -1,1 +1,5 @@
-exports.tableNames = ["Template List", "questions", "multiple_choice_options"];
+exports.tableNames = [
+  "Template List",
+  "Questions List",
+  "multiple_choice_options"
+];

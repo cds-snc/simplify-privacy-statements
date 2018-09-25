@@ -4,6 +4,7 @@ const initialState = {
   variableSelected: "none",
   editingMode: "researcher",
   templateList: [],
+  questionsList: [],
   errors: ""
 };
 
@@ -27,21 +28,21 @@ export const reducer = (state = initialState, action) => {
             : state[tableName];
       });
 
-      // set default values for questions
-      action.data.questions.map(question => {
-        newState[question.variable_name] = `${question.variable_name}`;
+      // create master list of questions and set default values for questions from all question lists
+      newState.allQuestions = new Set();
+      action.data.questionsList.forEach(qlist => {
+        action.data[qlist].forEach(question => {
+          newState[question.variable_name] = question.variable_name;
+          newState.allQuestions.add(question.variable_name);
+        });
       });
+      newState.allQuestions = Array.from(newState.allQuestions);
 
       return Object.assign({}, state, newState);
     case "SAVE_INPUT_DATA":
       newState = {};
-      const question_variable_names = state.questions.map(q => q.variable_name);
-      question_variable_names.forEach(key => {
-        if (!state[key]) {
-          state[key] = "";
-        }
-        newState[key] =
-          action.data[key] !== undefined ? action.data[key] : state[key];
+      Object.keys(action.data).forEach(key => {
+        newState[key] = action.data[key];
       });
       newState["errors"] =
         action.data["errors"] !== undefined
@@ -55,6 +56,10 @@ export const reducer = (state = initialState, action) => {
     case "SAVE_TEMPLATE_SELECTED":
       return Object.assign({}, state, {
         templateSelected: action.data.templateSelected
+      });
+    case "SAVE_QUESTIONS_SELECTED":
+      return Object.assign({}, state, {
+        questionsSelected: action.data.questionsSelected
       });
     case "SAVE_EDITING_MODE":
       return Object.assign({}, state, {
