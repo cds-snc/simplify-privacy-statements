@@ -33,7 +33,7 @@ export const reducer = (state = initialState, action) => {
       action.data.questionsList.forEach(qlist => {
         action.data[qlist].forEach(question => {
           newState[question.variable_name] = question.variable_name;
-          newState.allQuestions.add(question.variable_name);
+          newState.allQuestions.add(question);
         });
       });
       newState.allQuestions = Array.from(newState.allQuestions);
