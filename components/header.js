@@ -55,7 +55,9 @@ export class Header extends Component {
     return (
       <div className={Top}>
         <div className={Container}>
-          <h1 className={H1}>{this.props.text}</h1>
+          <h1 className={H1}>
+            <b>Proof of Concept</b> - {this.props.text}
+          </h1>
           <span className={buttonBar}>
             {editingTemplates ? (
               <Link href="/refresh">
