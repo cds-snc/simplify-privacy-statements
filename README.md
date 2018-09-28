@@ -1,4 +1,4 @@
-## Simplify Privacy Statements
+## Proof of Concept - Simplify Privacy Statements
 
 [![CircleCI](https://circleci.com/gh/cds-snc/simplify-privacy-statements.svg?style=svg)](https://circleci.com/gh/cds-snc/simplify-privacy-statements)
 [![Known Vulnerabilities](https://snyk.io/test/github/cds-snc/simplify-privacy-statements/badge.svg)](https://snyk.io/test/github/cds-snc/simplify-privacy-statements)
