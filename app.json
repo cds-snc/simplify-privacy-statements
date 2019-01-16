@@ -2,6 +2,9 @@
   "name": "simplify-privacy-statements",
   "scripts": {},
   "env": {
+    "AIRTABLE_WRITE_KEY": {
+      "required": true
+    },
     "VAC_CDS_SNC_KEY": {
       "required": true
     }

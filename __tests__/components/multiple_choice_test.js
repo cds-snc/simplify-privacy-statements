@@ -14,7 +14,7 @@ describe("MultiChoice", () => {
       name: "asdf",
       label: "asdf",
       hint: "asdf",
-      reduxState: { asdf: "rec0aV8zfp1HE5iF3" },
+      reduxState: { data: { asdf: "rec0aV8zfp1HE5iF3" } },
       saveInputData: jest.fn(),
       saveVariableSelected: jest.fn()
     };
@@ -50,7 +50,7 @@ describe("MultiChoice", () => {
   });
 
   it("option is selected if it is in redux", async () => {
-    props.reduxState["asdf"] = props.options[1].display_text;
+    props.reduxState.data["asdf"] = props.options[1].display_text;
 
     expect(
       mount(<MultipleChoice {...props} />)

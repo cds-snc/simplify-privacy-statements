@@ -17,7 +17,8 @@ describe("Questionaire", () => {
     reduxState = {
       questions: questionsFixture,
       multiple_choice_options: optionsFixture,
-      questionsSelected: "questions"
+      questionsSelected: "questions",
+      data: {}
     };
     props.reduxState = reduxState;
     props.store = mockStore(reduxState);

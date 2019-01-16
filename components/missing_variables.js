@@ -32,7 +32,7 @@ export class MissingVariables extends Component {
     });
 
     let missing_variables = allVariables.filter(
-      v => reduxState[v.variable] === undefined
+      v => reduxState.data[v.variable] === undefined
     );
 
     let valuesSeen = {};

@@ -22,7 +22,8 @@ describe("Index", () => {
       templateSelected: "template",
       questionSelected: "questions",
       questionsList: ["questions", "questions2"],
-      allQuestions: questionsFixture.map(q => q.variable_name)
+      allQuestions: questionsFixture.map(q => q.variable_name),
+      data: {}
     };
     props = {
       reduxState: reduxState,

@@ -22,7 +22,8 @@ describe("Guidance", () => {
       template: templateFixture,
       templateSelected: "template",
       allQuestions: questionsFixture.map(q => q.variable_name),
-      questionsSelected: "questions"
+      questionsSelected: "questions",
+      data: {}
     };
     props.reduxState = reduxState;
     props.store = mockStore(reduxState);

@@ -26,7 +26,7 @@ export class MultipleChoice extends Component {
             this.props.saveInputData({ [name]: option.display_text });
             this.props.saveVariableSelected({ variableSelected: name });
           }}
-          checked={option.display_text === reduxState[name] ? true : null}
+          checked={option.display_text === reduxState.data[name] ? true : null}
           onChange={() => {}} // remove jest warning
         >
           {option.display_text}

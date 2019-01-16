@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 
 const initialState = {
   variableSelected: "none",
@@ -10,7 +10,7 @@ const initialState = {
 
 // REDUCERS
 export const reducer = (state = initialState, action) => {
-  let newState;
+  let data, newState;
 
   switch (action.type) {
     case "LOAD_DATA":
@@ -30,20 +30,29 @@ export const reducer = (state = initialState, action) => {
 
       // create master list of questions and set default values for questions from all question lists
       newState.allQuestions = new Set();
+      newState.data = {};
       action.data.questionsList.forEach(qlist => {
         action.data[qlist].forEach(question => {
-          newState[question.variable_name] = question.variable_name;
+          newState.data[question.variable_name] = question.variable_name;
           newState.allQuestions.add(question);
         });
       });
       newState.allQuestions = Array.from(newState.allQuestions);
 
+      if (action.data.savedSet) {
+        newState.data = JSON.parse(action.data.savedSet.fields.data);
+        newState.templateSelected = action.data.savedSet.fields.template;
+      }
+
       return Object.assign({}, state, newState);
     case "SAVE_INPUT_DATA":
-      newState = {};
+      data = {};
       Object.keys(action.data).forEach(key => {
-        newState[key] = action.data[key];
+        data[key] = action.data[key];
       });
+      state.data = Object.assign({}, state.data, data);
+
+      newState = {};
       newState["errors"] =
         action.data["errors"] !== undefined
           ? action.data["errors"] !== undefined
@@ -71,5 +80,15 @@ export const reducer = (state = initialState, action) => {
 };
 
 export const initStore = (state = initialState) => {
-  return createStore(reducer, state);
+  return createStore(
+    reducer,
+    state,
+    compose(
+      applyMiddleware(),
+      typeof window === "object" &&
+      typeof window.devToolsExtension !== "undefined"
+        ? window.__REDUX_DEVTOOLS_EXTENSION__()
+        : f => f
+    )
+  );
 };

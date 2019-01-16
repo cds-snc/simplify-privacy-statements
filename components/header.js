@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { globalTheme } from "../theme";
 import Button from "../components/button";
+import Router from "next/router";
+
+require("isomorphic-fetch");
 
 // Top taken from https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
 
@@ -49,6 +52,29 @@ export class Header extends Component {
     }
   };
 
+  handleShare = async () => {
+    let payload = {
+      data: JSON.stringify(this.props.reduxState.data),
+      template: this.props.reduxState.templateSelected
+    };
+    const resp = await fetch("/submitSet", {
+      body: JSON.stringify(payload),
+      cache: "no-cache",
+      headers: {
+        "content-type": "application/json"
+      },
+      method: "POST"
+    });
+
+    const data = await resp.json();
+    const newQuery = Router.query;
+    newQuery.id = data.id;
+    Router.push({
+      pathname: Router.pathname,
+      query: newQuery
+    });
+  };
+
   render() {
     const editingTemplates = this.props.reduxState.editingMode === "policy";
 
@@ -63,7 +89,11 @@ export class Header extends Component {
               <Link href="/refresh">
                 <Button className={button}>Refresh Airtable</Button>
               </Link>
-            ) : null}
+            ) : (
+              <Button className={button} onClick={this.handleShare}>
+                Share
+              </Button>
+            )}
             <Button className={button} onClick={this.handleOnClick}>
               {editingTemplates ? "Researcher Mode" : "Policy Mode"}
             </Button>

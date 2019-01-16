@@ -48,9 +48,10 @@ export class Questionaire extends Component {
             g,
             reduxState.allQuestions,
             reduxState.multiple_choice_options,
-            reduxState
+            reduxState.data
           )
         )
+
         .forEach((q, k2) => {
           const props = {
             className: form_group,
@@ -60,7 +61,7 @@ export class Questionaire extends Component {
               id: q.variable_name,
               onChange: this.getOnChange(q.variable_name),
               onFocus: this.getOnFocus(q.variable_name),
-              value: reduxState[q.variable_name]
+              value: reduxState.data[q.variable_name]
             },
             hint: q.hint,
             key: k1 + "-" + k2

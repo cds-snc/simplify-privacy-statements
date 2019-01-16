@@ -53,7 +53,7 @@ class Guidance extends Component {
         <Layout>
           <div className={body}>
             <p className={introText}>
-              Please read through the following crideria on how to conduct the
+              Please read through the following criteria on how to conduct the
               research based on the requirements you provided in the previous
               step. If you cannot comply with the criteria, you may go back and
               change the requirements to fit you needs.

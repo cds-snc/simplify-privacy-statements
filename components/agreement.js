@@ -16,7 +16,7 @@ export class Agreement extends Component {
 
   colouringFunction = (match, p1) => {
     const variableSelected = this.props.reduxState.variableSelected;
-    const variableValue = this.props.reduxState[p1];
+    const variableValue = this.props.reduxState.data[p1];
     return `<VariableColouring variableSelected="${variableSelected}" variable="${p1}" variableValue="${variableValue}"/>`;
   };
 
@@ -43,7 +43,7 @@ export class Agreement extends Component {
             row,
             reduxState.allQuestions,
             reduxState.multiple_choice_options,
-            reduxState
+            reduxState.data
           )
         )
         .map(

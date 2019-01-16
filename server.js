@@ -33,9 +33,14 @@ Promise.resolve(getAirtableData()).then(data => {
     server.use(compression());
     server.use(bodyParser.json());
     server.use(helmet());
+    server.post("/submitSet", (req, res) => {
+      Promise.resolve(airTable.writeSavedSet(req.body)).then(resp => {
+        res.send(`{"id": "${resp.id}"}`);
+      });
+    });
 
     // use next.js
-    server.get("*", (req, res) => {
+    server.get("*", async (req, res) => {
       // Check if browse is less than IE 11
       const ua = req.headers["user-agent"];
       const browser = parseUserAgent(ua);
@@ -46,7 +51,11 @@ Promise.resolve(getAirtableData()).then(data => {
         });
       }, 1000 * 60 * 60);
 
-      req.data = data;
+      if (req.query.id) {
+        req.data = await airTable.hydrateFromAirtable(req.query.id);
+      } else {
+        req.data = data;
+      }
 
       if (
         browser &&

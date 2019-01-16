@@ -13,9 +13,11 @@ describe("MissingVariables", () => {
       // missing researcher_name
       reduxState: {
         template: templateFixture,
-        researcher_email: "email",
-        researcher_phone: "phone",
-        templateSelected: "template"
+        templateSelected: "template",
+        data: {
+          researcher_email: "email",
+          researcher_phone: "phone"
+        }
       }
     };
   });
@@ -31,7 +33,7 @@ describe("MissingVariables", () => {
 
   describe("function missingTemplateVariables", () => {
     it("works if none missing", () => {
-      props.reduxState.researcher_name = "name";
+      props.reduxState.data.researcher_name = "name";
       const reduxState = props.reduxState;
       const instance = mount(<MissingVariables {...props} />).instance();
       expect(instance.missingTemplateVariables(reduxState)).toEqual([]);
@@ -39,7 +41,7 @@ describe("MissingVariables", () => {
 
     it("works if variable missing", () => {
       const reduxState = props.reduxState;
-      delete reduxState.researcher_name;
+      delete reduxState.data.researcher_name;
       const instance = mount(<MissingVariables {...props} />).instance();
       expect(instance.missingTemplateVariables(reduxState)).toEqual([
         {
