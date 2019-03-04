@@ -129,7 +129,8 @@ const mapDispatchToProps = dispatch => {
 Questionaire.propTypes = {
   reduxState: PropTypes.object,
   saveInputData: PropTypes.func,
-  store: PropTypes.object
+  store: PropTypes.object,
+  saveVariableSelected: PropTypes.func
 };
 
 export default connect(

@@ -104,7 +104,8 @@ Radio.propTypes = {
   inline: PropTypes.bool,
   helper: PropTypes.string,
   className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  helperText: PropTypes.string
 };
 
 export default Radio;
