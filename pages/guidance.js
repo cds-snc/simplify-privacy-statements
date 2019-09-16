@@ -56,7 +56,7 @@ class Guidance extends Component {
               Please read through the following criteria on how to conduct the
               research based on the requirements you provided in the previous
               step. If you cannot comply with the criteria, you may go back and
-              change the requirements to fit you needs.
+              change the requirements to fit your needs.
             </p>
 
             <h2>Guidance</h2>
