@@ -19,11 +19,11 @@ const Top = css`
   z-index: 10;
   padding-top: 24px;
   background-color: #000;
-  height: 80px;
+  height: 120px;
 `;
 const H1 = css`
   display: inline-block;
-  font-size: 2em;
+  font-size: 29px;
   color: ${globalTheme.colour.cdsYellow};
   margin: 0px;
   font-weight: normal;
@@ -31,6 +31,7 @@ const H1 = css`
 const button = css`
   display: inline-block;
   margin-right: 10px;
+  padding: 1px;
 `;
 const buttonBar = css`
   float: right;
@@ -38,9 +39,7 @@ const buttonBar = css`
 const Container = css`
   box-sizing: border-box;
   margin: 0 auto;
-  max-width: 1600px;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  max-width: 750px;
 `;
 
 export class Header extends Component {
@@ -83,21 +82,21 @@ export class Header extends Component {
         <div className={Container}>
           <h1 className={H1}>
             <b>Proof of Concept</b> - {this.props.text}
-          </h1>
-          <span className={buttonBar}>
-            {editingTemplates ? (
-              <Link href="/refresh">
-                <Button className={button}>Refresh Airtable</Button>
-              </Link>
-            ) : (
-              <Button className={button} onClick={this.handleShare}>
-                Share
+            <div className={buttonBar}>
+              {editingTemplates ? (
+                <Link href="/refresh">
+                  <Button className={button}>Refresh Airtable</Button>
+                </Link>
+              ) : (
+                <Button className={button} onClick={this.handleShare}>
+                  Share
+                </Button>
+              )}
+              <Button className={button} onClick={this.handleOnClick}>
+                {editingTemplates ? "Researcher Mode" : "Policy Mode"}
               </Button>
-            )}
-            <Button className={button} onClick={this.handleOnClick}>
-              {editingTemplates ? "Researcher Mode" : "Policy Mode"}
-            </Button>
-          </span>
+            </div>
+          </h1>
         </div>
       </div>
     );

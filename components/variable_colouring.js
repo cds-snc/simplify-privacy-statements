@@ -21,7 +21,7 @@ export class VariableColouring extends Component {
     switch (this.variableStatus(variableSelected, variable, variableValue)) {
       case "selected":
         style = css`
-          background-color: ${globalTheme.colour.cdsYellow};
+          color: ${globalTheme.colour.black};
         `;
         break;
       case "not filled in":
@@ -31,7 +31,7 @@ export class VariableColouring extends Component {
         break;
       case "filled in":
         style = css`
-          color: ${globalTheme.colour.fernGreen};
+          color: ${globalTheme.colour.black};
         `;
     }
     return <span className={style}>{this.props.variableValue}</span>;

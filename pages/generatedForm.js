@@ -3,33 +3,40 @@ import { css } from "react-emotion";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Layout from "../components/layout";
-import Questionaire from "../components/questionaire";
+import Agreement from "../components/agreement";
 import Header from "../components/header";
 import Button from "../components/button";
 import Dropdown from "../components/dropdown";
 import Link from "next/link";
 
 const dropdownStyle = css`
+  display: inline;
   margin-bottom: 10px;
 `;
 
-export const Index = props => {
+const linkStyle = css`
+  padding: 5px;
+  margin-right: 50px;
+`;
+
+export const GeneratedForm = props => {
   return (
     <React.Fragment>
       <Header store={props.store} />
       <Layout>
+        <Link href="/">
+          <Button className={linkStyle}>Back</Button>
+        </Link>
         <Dropdown
-          label="Questions"
-          options={props.reduxState.questionsList}
-          selected={props.reduxState.questionSelected}
-          saveSelected={props.saveQuestionsSelected}
+          label="Template"
+          options={props.reduxState.templateList}
+          selected={props.reduxState.templateSelected}
+          saveSelected={props.saveTemplateSelected}
           className={dropdownStyle}
         />
-        <h2>Questionaire</h2>
-        <Questionaire store={props.store} />
-
-        <Link href="generatedForm">
-          <Button>Generated Form</Button>
+        <Agreement store={props.store} />
+        <Link href="/guidance">
+          <Button>Download Word Doc</Button>
         </Link>
       </Layout>
     </React.Fragment>
@@ -49,24 +56,17 @@ const mapDispatchToProps = dispatch => {
         type: "SAVE_TEMPLATE_SELECTED",
         data: { templateSelected: x }
       });
-    },
-    saveQuestionsSelected: x => {
-      dispatch({
-        type: "SAVE_QUESTIONS_SELECTED",
-        data: { questionsSelected: x }
-      });
     }
   };
 };
 
-Index.propTypes = {
+GeneratedForm.propTypes = {
   reduxState: PropTypes.object,
   saveTemplateSelected: PropTypes.func,
-  saveQuestionsSelected: PropTypes.func,
   store: PropTypes.object
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Index);
+)(GeneratedForm);

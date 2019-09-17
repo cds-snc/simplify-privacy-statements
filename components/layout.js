@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 
 const page_wrapper = css`
   margin: 0 auto;
-  max-width: 1600px;
+  max-width: 750px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   font-family: "nta", Arial, sans-serif;
   padding-top: 0px;
   padding-bottom: 0px;
