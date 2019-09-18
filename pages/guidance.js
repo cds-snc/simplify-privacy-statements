@@ -24,11 +24,28 @@ const introText = css`
   font-weight: bold;
   margin-bottom: 40px;
 `;
+let postData = (url = "", html = "") => {
+  return fetch(url, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    redirect: "follow", // manual, *follow, error
+    referrer: "no-referrer", // no-referrer, *client
+    body: JSON.stringify({ html: html }) // body data type must match "Content-Type" header
+  }).then(response => response.json()); // parses JSON response into native JavaScript objects
+};
 
 class Guidance extends Component {
   getBlobUrl = (elementId, anchorId) => {
     if (window && !this.props.test) {
       var content = document.getElementById(elementId).innerHTML;
+      postData("/converter", content);
+
       var myBlob = htmlDocx.asBlob(content);
       var blobURL = window.URL.createObjectURL(myBlob);
       var a = document.getElementById(anchorId);
