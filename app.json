@@ -1,6 +1,8 @@
 {
   "name": "simplify-privacy-statements",
-  "scripts": {},
+  "scripts": {
+    "predeploy": "apt-get install pandoc"
+  },
   "env": {
     "AIRTABLE_WRITE_KEY": {
       "required": true
@@ -17,7 +19,8 @@
   "addons": [],
   "buildpacks": [
     {
-      "url": "heroku/nodejs"
+      "url": "heroku/nodejs",
+      "url": "heroku-community/apt"
     }
   ]
 }
