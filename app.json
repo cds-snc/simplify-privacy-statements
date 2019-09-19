@@ -1,8 +1,6 @@
 {
   "name": "simplify-privacy-statements",
-  "scripts": {
-    "predeploy": "apt-get install pandoc"
-  },
+  "scripts": {},
   "env": {
     "AIRTABLE_WRITE_KEY": {
       "required": true
