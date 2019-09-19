@@ -39,35 +39,16 @@ let postData = (url = "", html = "") => {
     body: JSON.stringify({ html: html }) // body data type must match "Content-Type" header
   }).then(response => {
     // console.log(response.body)
-    response.blob().then(function(myBlob) {
-      var blobURL = window.URL.createObjectURL(myBlob);
-      var a = document.getElementById("agreement_download_anchor");
-      a.href = blobURL;
-      a.download = "agreement_" + Date.now().toString() + ".docx";
-      // a.download = "agreement_" + Date.now().toString() + ".md";
-      a.click();
-    });
+    console.log(response);
   });
 };
 
 class Guidance extends Component {
-  getBlobUrl = (elementId, anchorId) => {
-    if (window && !this.props.test) {
-      var content = document.getElementById(elementId).innerHTML;
-      postData("/converter", content);
-
-      var myBlob = htmlDocx.asBlob(content);
-      var blobURL = window.URL.createObjectURL(myBlob);
-      var a = document.getElementById(anchorId);
-      // a.href = blobURL;
-      // a.download = elementId + "_" + Date.now().toString() + ".docx";
-      // a.click();
-    }
-    return null;
-  };
-
   componentDidMount() {
-    this.getBlobUrl("agreement", "agreement_download_anchor");
+    if (window && !this.props.test) {
+      var content = document.getElementById("agreement").innerHTML;
+      postData("/converter", content);
+    }
   }
 
   render() {
@@ -104,9 +85,7 @@ class Guidance extends Component {
               <a id="guidance_download_anchor" style={{ display: "none" }}>
                 Download Guidance
               </a>
-              <a id="agreement_download_anchor" style={{ display: "none" }}>
-                Download Agreement
-              </a>
+
               <a href="/static/agreement.docx">agreement.docx</a>
               <Link href="/">
                 <Button secondary={true}>Back</Button>
