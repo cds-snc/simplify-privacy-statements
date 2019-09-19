@@ -10,8 +10,6 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-// server.use(bodyParser.urlencoded({ extended: false }));
-
 const airTable = require("./utils/airtable");
 
 const getAirtableData = async function() {
@@ -34,9 +32,7 @@ Promise.resolve(getAirtableData()).then(data => {
     const server = express();
     server.use(compression());
     server.use(bodyParser.json());
-    server.use(bodyParser.urlencoded({ extended: false }));
     server.use(helmet());
-    // server.use(bodyParser.json());
 
     server.post("/submitSet", (req, res) => {
       Promise.resolve(airTable.writeSavedSet(req.body)).then(resp => {
@@ -46,12 +42,21 @@ Promise.resolve(getAirtableData()).then(data => {
 
     // use next.js
     server.post("/converter", async (req, res) => {
-      // console.log("hi")
-      console.log(req.body);
-
-      // res.sendFile()
-      // nodePandoc.
+      var callback = (err, result) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log("done");
+          // res.send(result)
+        }
+      };
+      nodePandoc(
+        req.body.html,
+        "-f html -t docx -o ./static/agreement.docx",
+        callback
+      );
     });
+
     server.get("*", async (req, res) => {
       // Check if browse is less than IE 11
       const ua = req.headers["user-agent"];

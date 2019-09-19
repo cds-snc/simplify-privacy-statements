@@ -37,7 +37,17 @@ let postData = (url = "", html = "") => {
     redirect: "follow", // manual, *follow, error
     referrer: "no-referrer", // no-referrer, *client
     body: JSON.stringify({ html: html }) // body data type must match "Content-Type" header
-  }).then(response => response.json()); // parses JSON response into native JavaScript objects
+  }).then(response => {
+    // console.log(response.body)
+    response.blob().then(function(myBlob) {
+      var blobURL = window.URL.createObjectURL(myBlob);
+      var a = document.getElementById("agreement_download_anchor");
+      a.href = blobURL;
+      a.download = "agreement_" + Date.now().toString() + ".docx";
+      // a.download = "agreement_" + Date.now().toString() + ".md";
+      a.click();
+    });
+  });
 };
 
 class Guidance extends Component {
@@ -49,9 +59,9 @@ class Guidance extends Component {
       var myBlob = htmlDocx.asBlob(content);
       var blobURL = window.URL.createObjectURL(myBlob);
       var a = document.getElementById(anchorId);
-      a.href = blobURL;
-      a.download = elementId + "_" + Date.now().toString() + ".docx";
-      a.click();
+      // a.href = blobURL;
+      // a.download = elementId + "_" + Date.now().toString() + ".docx";
+      // a.click();
     }
     return null;
   };
@@ -97,6 +107,7 @@ class Guidance extends Component {
               <a id="agreement_download_anchor" style={{ display: "none" }}>
                 Download Agreement
               </a>
+              <a href="/static/agreement.docx">agreement.docx</a>
               <Link href="/">
                 <Button secondary={true}>Back</Button>
               </Link>
