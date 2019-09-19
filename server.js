@@ -47,7 +47,7 @@ Promise.resolve(getAirtableData()).then(data => {
           console.error(err);
         } else {
           console.log("done");
-          // res.send(result)
+          res.send("done");
         }
       };
       nodePandoc(

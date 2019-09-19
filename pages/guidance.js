@@ -39,7 +39,7 @@ let postData = (url = "", html = "") => {
     body: JSON.stringify({ html: html }) // body data type must match "Content-Type" header
   }).then(response => {
     // console.log(response.body)
-    console.log(response);
+    console.log("done");
   });
 };
 
@@ -47,6 +47,7 @@ class Guidance extends Component {
   componentDidMount() {
     if (window && !this.props.test) {
       var content = document.getElementById("agreement").innerHTML;
+      console.log(content);
       postData("/converter", content);
     }
   }
