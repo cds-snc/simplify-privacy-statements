@@ -19,17 +19,16 @@ export const Index = props => {
       <Header store={props.store} />
       <Layout>
         <Dropdown
-          label="Questions"
+          label="Which form do you need?"
           options={props.reduxState.questionsList}
           selected={props.reduxState.questionSelected}
           saveSelected={props.saveQuestionsSelected}
           className={dropdownStyle}
         />
-        <h2>Questionaire</h2>
         <Questionaire store={props.store} />
 
         <Link href="generatedForm">
-          <Button>Generated Form</Button>
+          <Button>Generate form</Button>
         </Link>
       </Layout>
     </React.Fragment>

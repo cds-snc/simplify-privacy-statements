@@ -95,13 +95,10 @@ export class Questionaire extends Component {
     return (
       <React.Fragment>
         <p>
-          Tell us about the research you wish to conduct and this application
-          will generate a Privacy Statement form for you to give to your
-          participants and collect their consent.
+          Enter information about your research project to generate the forms and privacy notices you need. 
         </p>
         <p>
-          Please read through all the conditions as you select your research
-          requirements.
+          Show them to your ATIP office for approval before using them.
         </p>
         {jsx_array}
       </React.Fragment>

@@ -81,7 +81,7 @@ export class Header extends Component {
       <div className={Top}>
         <div className={Container}>
           <h1 className={H1}>
-            <b>Proof of Concept</b> - {this.props.text}
+            {this.props.text}
             <div className={buttonBar}>
               {editingTemplates ? (
                 <Link href="/refresh">
@@ -89,7 +89,7 @@ export class Header extends Component {
                 </Link>
               ) : (
                 <Button className={button} onClick={this.handleShare}>
-                  Share
+                  Share your input
                 </Button>
               )}
               <Button className={button} onClick={this.handleOnClick}>
@@ -118,7 +118,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 Header.defaultProps = {
-  text: "Privacy and Consent Form Generator"
+  text: "Generate privacy and consent forms for research sessions"
 };
 
 Header.propTypes = {
